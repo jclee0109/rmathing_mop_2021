@@ -53,6 +53,8 @@ class SubjectInfo(models.Model):
     year = models.PositiveSmallIntegerField(blank=True, null=True)
     session = models.CharField(max_length=100, blank=True, null=True)
 
+    select_person = models.PositiveSmallIntegerField(blank=True, null=True, default=0)
+
     def __str__(self):
         return self.name
 

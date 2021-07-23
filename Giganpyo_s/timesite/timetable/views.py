@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import SubjectInfo, Subject_add, Evaluation, SubjectEval
+from .models import SubjectInfo, Subject_add, Evaluation
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q, Count
 from django.shortcuts import render, get_object_or_404
@@ -96,6 +96,14 @@ def mytable(request, user_id):
     day = request.GET.get('day')  # 요일
     time = request.GET.get('time')  # 시간
     department = request.GET.get('department')  # 부서
+    select_num = 0  # 과목 선택한 사람
+    subject_add_all_list = Subject_add.objects.all().values('subject_add_id').order_by('subject_add_id')
+
+
+
+
+
+
     subject_add_list = Subject_add.objects.filter(user_id=request.user.id).values('subject_add_id').distinct().order_by(
         'subject_add_id')
     subject_selected_list = []
@@ -149,7 +157,7 @@ def mytable(request, user_id):
         qs = qs.filter(department=department)
 
     context = {'subject_list': qs, 'subject_selected_list': subject_selected_list,
-               'sum': sum}
+               'sum': sum, 'select_num': select_num}
     return render(request, 'timetable/main.html', context)
 
 
@@ -813,6 +821,8 @@ def add(request, subject_id):
             tmp.subject_add = tmp_subject
             tmp.user = request.user
             tmp.save()
+            tmp_subject.select_person += 1
+            tmp_subject.save()
 
         return redirect('timetable:mytable', user_id=request.user.id)
 
@@ -825,6 +835,8 @@ def delete(request, subject_id):
         tmp_delete = SubjectInfo.objects.get(id=subject_id)
         temp = Subject_add.objects.filter(subject_add_id=subject_id, user_id=request.user.id)
         temp.delete()
+        tmp_delete.select_person -= 1
+        tmp_delete.save()
     return redirect('timetable:mytable', user_id=request.user.id)
 
 
@@ -833,12 +845,9 @@ def eval_add(request, subject_id):
     평가 등록
     """
     sub_ject = SubjectInfo.objects.get(id=subject_id)
-
     evaluation = Evaluation(subject=sub_ject, comment=request.POST.get('content'))
     evaluation.save()
     return redirect('timetable:mytable', user_id=request.user.id)
-
-
 
 # def data_save(request):
 #     # 엑셀파일 받기
