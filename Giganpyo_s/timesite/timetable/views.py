@@ -96,11 +96,16 @@ def mytable(request, user_id):
     day = request.GET.get('day')  # 요일
     time = request.GET.get('time')  # 시간
     department = request.GET.get('department')  # 부서
-    select_num = 0  # 과목 선택한 사람
-    subject_add_all_list = Subject_add.objects.all().values('subject_add_id').order_by('subject_add_id')
 
-
-
+    # 과목을 선택한 사람의 수 계산하기(처음)
+    # subject_add_all_list = Subject_add.objects.all().values('subject_add_id').order_by('subject_add_id')
+    # qs = SubjectInfo.objects.all()
+    # for i in range(len(list(qs))):
+    #     tmp_sub = SubjectInfo.objects.get(id=i+1)
+    #     for j in range(len(list(subject_add_all_list))):
+    #         if subject_add_all_list[j].get('subject_add_id') == i+1:
+    #             tmp_sub.select_person += 1
+    #     tmp_sub.save()
 
 
 
@@ -157,7 +162,7 @@ def mytable(request, user_id):
         qs = qs.filter(department=department)
 
     context = {'subject_list': qs, 'subject_selected_list': subject_selected_list,
-               'sum': sum, 'select_num': select_num}
+               'sum': sum,}
     return render(request, 'timetable/main.html', context)
 
 
