@@ -9,5 +9,6 @@ urlpatterns = [
     path('add/<int:subject_id>/', views.add, name='add'),
     path('del/<int:subject_id>/', views.delete, name='del'),
     path('eval_add/<int:subject_id>/', views.eval_add, name='eval_add'),
+    path('eval_info/', views.eval_info, name='eval_info'),
     # path('data/',views.data_save, name = 'data_save'),
 ]

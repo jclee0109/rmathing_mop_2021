@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import SubjectInfo, Subject_add, Evaluation
+from .models import SubjectEval, SubjectInfo, Subject_add, Evaluation
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q, Count
 from django.shortcuts import render, get_object_or_404
@@ -161,8 +161,24 @@ def mytable(request, user_id):
     if is_valid_queryparam(department):
         qs = qs.filter(department=department)
 
+    """
+    과목 평가
+    """
+    eval = pd.DataFrame(list(Evaluation.objects.all().values()))
+    subject = pd.DataFrame(list(SubjectInfo.objects.all().values()))
+    subject_eval = subject.merge(eval, left_on = 'id', right_on = 'subject_id').loc[:, ['name', 'professor1', 'professor2', 'year', 'session', 'test', 'assignment', 'grade', 'comment', 'subject_id']]
+    subject_eval = subject_eval.groupby(['name', 'professor1']).mean().reset_index()
+    subject_eval_list = []
+    eval_list = []
+    subject_eval_comment = subject.merge(eval, left_on = 'id', right_on = 'subject_id').loc[:, ['name', 'professor1', 'professor2', 'year', 'session', 'test', 'assignment', 'grade', 'comment', 'subject_id']]
+
+    for i in range(subject_eval.shape[0]):
+        subject_eval_list.append(subject_eval.iloc[i].to_dict())
+    for i in range(subject_eval_comment.shape[0]):
+        eval_list.append(subject_eval_comment.iloc[i].to_dict())
+
     context = {'subject_list': qs, 'subject_selected_list': subject_selected_list,
-               'sum': sum,}
+               'sum': sum, 'eval_list':eval_list, 'subject_eval_list' : subject_eval_list}
     return render(request, 'timetable/main.html', context)
 
 
@@ -853,6 +869,10 @@ def eval_add(request, subject_id):
     evaluation = Evaluation(subject=sub_ject, comment=request.POST.get('content'))
     evaluation.save()
     return redirect('timetable:mytable', user_id=request.user.id)
+
+def eval_info(request):
+    
+    return render(request, 'timetable/main.html', context)
 
 # def data_save(request):
 #     # 엑셀파일 받기

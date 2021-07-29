@@ -1489,6 +1489,20 @@ ctx.font = '12px Arial';
                             <div  class="subject_button2">
                                 <div id="result_bag1">
                                     {{ subject.name }} - {{ subject.professor1 }}
+                                    {% for subject_eval in subject_eval_list %}
+                                    {% if subject.name == subject_eval.name %}
+                                    {% if subject.professor1 == subject_eval.professor1 %}
+                                    / 시험 : {{ subject_eval.test }} / 과제 : {{ subject_eval.assignment }} / 성적 : {{ subject_eval.grade }} <br>
+                                    {% endif %}
+                                    {% endif %}
+                                    {% endfor %}
+                                    {% for eval in eval_list %}
+                                    {% if subject.name == eval.name %}
+                                    {% if subject.professor1 == eval.professor1 %}
+                                    / {{ eval.comment }} / {{ eval.test }} / {{ eval.assignment }} / {{ eval.grade }} / <br>
+                                    {% endif %}
+                                    {% endif %}
+                                    {% endfor %}
                                     {% if subject.count == 1 %}
                                     / {{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}
                                     {% elif subject.count == 2 %}
