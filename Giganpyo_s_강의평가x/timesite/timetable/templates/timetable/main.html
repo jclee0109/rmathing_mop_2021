@@ -13,17 +13,54 @@ src: url('/fonts/NanumBarunGothic.eot') format('embedded-opentype'),
 url('/fonts/NanumBarunGothic.woff') format('woff');}
 
     @media  only screen and (min-width:650px) and (max-width:1024px) {
+      #view_write_alarm{
+        border-radius: 5px;
+         border-top-left-radius: 0%;
+         border-bottom-left-radius: 0%;
+         padding: 20px;
+         padding: 3px;
+         color: white;
+         font-size:13px; 
+         font-weight: 100;
+         background-color: rgb(58, 184, 106);
+         border: none;
+         position: fixed;
+         z-index: 5;
+         width: 30px;
+        height: 110px;
+        }
+      #alarms{
+       background-color: rgb(218, 218, 218);
+        color:black;
+         font-size:12px; 
+         text-align:left;
+         margin-bottom:20px;
+         border-radius: 5px;
+         border-top-left-radius: 0%;
+         border-bottom-left-radius: 0%;
+         padding: 10px;
+         padding-top: 0;
+         padding-bottom: 0;
+         position: fixed;
+         margin-left: 28px;
+        z-index: 4;
+      height: 110px;
+      text-align: left;   
+      width: 270px;
+      }
     #table2 { position:relate!important;}
 #outer_btn_right { display: none; }
 #table2 { display: none; }
 #myCanvas1{
 position: absolute;
+z-index: 2;
 }
 #myCanvas2{
 display: none;
     }
 #myCanvas3{
 position: absolute;
+z-index: 3;
 }
 label {
 display: inline-block;
@@ -272,7 +309,7 @@ height: 350px;
  background-color: #a7a7a7;
 
     padding:70px;
-     padding-top:5px;
+     padding-top:50px;
     text-align: center;
     color:white;
     font-size:15px;
@@ -344,6 +381,13 @@ padding: 5px;
 background-color:rgb(240, 240, 240);
 width:196;
 }
+#so{
+    padding: 5px;
+    margin: 1px;
+background-color:rgb(240, 240, 240);
+width:600;
+}
+}
 select:hover{
 padding: 5px;
 background-color:white;
@@ -361,6 +405,42 @@ width:297px!important;
 </style>
     <style >
     @media  only screen and  (min-width:1024px) {
+      #view_write_alarm{
+        border-radius: 5px;
+         border-top-left-radius: 0%;
+         border-bottom-left-radius: 0%;
+         padding: 20px;
+         padding: 3px;
+         color: white;
+         font-size:13px; 
+         font-weight: 100;
+         background-color: rgb(58, 184, 106);
+         border: none;
+         position: fixed;
+         z-index: 5;
+         width: 30px;
+        height: 110px;
+        }
+      #alarms{
+       background-color: rgb(218, 218, 218);
+        color:black;
+         font-size:12px; 
+         text-align:left;
+         margin-bottom:20px;
+         border-radius: 5px;
+         border-top-left-radius: 0%;
+         border-bottom-left-radius: 0%;
+         padding: 10px;
+         padding-top: 0;
+         padding-bottom: 0;
+         position: fixed;
+         margin-left: 28px;
+        z-index: 4;
+      height: 110px;
+      text-align: left;   
+      width: 270px;
+      }
+      
       #table2 { display: none; }
     #table1 { position:relative;}
     #myCanvas2{
@@ -368,11 +448,11 @@ width:297px!important;
     }
     #myCanvas1{
     position: absolute!important;
-    z-index :1;
+    z-index :2;
     }
     #myCanvas3{
     position: absolute!important;
-    z-index :2;
+    z-index :3;
     }
     #light_down{
     display:none;
@@ -446,6 +526,7 @@ table {
    border: 0.1px solid #444444;
   border-collapse: collapse;
   font-size: 5px;
+  z-index: 1;
 }
 th,
 td {
@@ -649,7 +730,7 @@ height: 500px;
  background-color: #a7a7a7;
 
     padding:70px;
-     padding-top:5px;
+     padding-top:50px;
     text-align: center;
     color:white;
     font-size:15px;
@@ -735,16 +816,53 @@ i{display:none;}
     <style>
 
 @media  only screen and (max-width:650px) {
+  #view_write_alarm{
+        border-radius: 2px;
+         border-top-left-radius: 0%;
+         border-bottom-left-radius: 0%;
+         padding: 5px;
+         color: white;
+         font-size:6px; 
+         font-weight: 50;
+         background-color: rgb(58, 184, 106);
+         border: none;
+         position: fixed;
+         z-index: 5;
+         width: 20px;
+        height: 70px;
+        }
+      #alarms{
+       background-color: rgb(218, 218, 218);
+        color:black;
+         font-size:5px; 
+         text-align:left;
+         margin-bottom:20px;
+         border-radius: 5px;
+         border-top-left-radius: 0%;
+         border-bottom-left-radius: 0%;
+         padding: 5px;
+         padding-top: 0;
+         padding-bottom: 0;
+         position: fixed;
+         margin-left: 16px;
+        z-index: 4;
+      height: 70px;
+      text-align: left;   
+      width: 230px;
+      }
 #table1 { display: none; }
 #table2 { position:relate!important;}
 #myCanvas1{
 display: none;
+z-index: 2;
 }
 #myCanvas3{
 display: none;
+z-index: 3;
 }
 #myCanvas2{
 position: absolute;
+z-index: 2;
 }
 #outer_btn_right { display: none; }
 
@@ -1011,7 +1129,7 @@ font-size: 6px;
 #bottom_design{
  background-color: #a7a7a7;
     padding:35px;
-     padding-top:5px;
+     padding-top:20px;
     text-align: center;
     color:white;
     font-size:7px;
@@ -1084,6 +1202,12 @@ width:95px;
     font-size: 5px;
 }
 
+#so{
+    padding: 5px;
+    margin: 1px;
+background-color:rgb(240, 240, 240);
+width:296;
+}
 select:hover{
 padding: 3px;
 background-color:white;
@@ -1392,7 +1516,16 @@ ctx.font = '12px Arial';
 <div class="container my-3">
     <!--테이블 생성-->
     <div class="line">
-        <div>&nbsp</div>
+      <div>
+        <button id="view_write_alarm" onclick=location.href="javascript:viewDisplay();">주의사항</button>
+        <div id="clickToView" style="display:none; position: absolute;">
+          <div id= "alarms" >
+            1. pc에서 사용하는것을 권장합니다!<br><br>
+            2. 아이폰,아이패드에서는 오류가 날 수 있어요 ㅜ<br><br>
+            3. 크롬에서 사용하기를 권장합니다!<br>
+          </div>
+        </div>
+    </div>
         <div id="login_back">
             <canvas
                     id="myCanvas1"
@@ -1663,23 +1796,26 @@ ctx.font = '12px Arial';
                         <td class = "text-left">
                             <div  class="subject_button2">
                               <div id="result_bag1">
-                                {{ subject.name }} - {{ subject.professor1 }}
+                                <strong>{{subject.code}}</strong>  
+                                {{ subject.name }} - {{ subject.professor1 }}<br>
                                 {% if subject.count == 1 %}
-                                / {{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}
+                                &nbsp;&nbsp;-&nbsp;{{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}
                                 {% elif subject.count == 2 %}
-                                / {{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}
+                                &nbsp;&nbsp;-&nbsp;{{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}
                                 / {{ subject.day2 }} {{ subject.start_time2 }}~{{ subject.finish_time2 }}
                                 {% elif subject.count == 3 %}
-                                {{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}
-                                / {{ subject.day2 }} {{ subject.start_time2 }}~{{ subject.finish_time2 }}
+                                &nbsp;&nbsp;-&nbsp;{{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}
+                                {{ subject.day2 }} {{ subject.start_time2 }}~{{ subject.finish_time2 }}
                                 / {{ subject.day3 }} {{ subject.start_time3 }}~{{ subject.finish_time3 }}
                                 {% elif subject.count == 4 %}
-                                / {{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}
+                                &nbsp;&nbsp;-&nbsp;{{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}
                                 / {{ subject.day2 }} {{ subject.start_time2 }}~{{ subject.finish_time2 }}
                                 / {{ subject.day3 }} {{ subject.start_time3 }}~{{ subject.finish_time3 }}
                                 / {{ subject.day4 }} {{ subject.start_time4 }}~{{ subject.finish_time4 }}
                                 {% endif %}
                                 / {{ subject.credit }} 학점
+                                /  총 {{subject.select_person}} 명 선택
+                                                <!-- TEMP -->
                             </div>
 
 
@@ -1735,7 +1871,7 @@ ctx.font = '12px Arial';
                     <option value="16:00">16:00~17:30</option>
                 </select>
 
-                <select name="so">
+                <select id="so" name="so">
                   <option value="">정렬 옵션</option>
                   <option value="default">기본 정렬</option>
                   <option value="name">이름순 정렬</option>
@@ -1768,7 +1904,7 @@ ctx.font = '12px Arial';
                                     <div id="subject_table">
                                         <div id="subject_table1" class="subject_button">
                                             <div id="subject_table1_1">
-                                                {{ subject.id }}
+                                              <strong>{{subject.code}} </strong>
                                                 {{ subject.name }} - {{ subject.professor1 }}
 
                                             </div>
@@ -1793,6 +1929,8 @@ ctx.font = '12px Arial';
                                             / {{ subject.day4 }} {{ subject.start_time4 }}~{{ subject.finish_time4 }}
                                             {% endif %}
                                             / {{ subject.credit }} 학점
+                                            / 총 {{subject.select_person}} 명 선택
+                                                <!-- TEMP -->
 
                                         </div>
                                     </div>
@@ -1911,7 +2049,7 @@ ctx.font = '12px Arial';
                                 <div id="subject_table">
                                     <div id="subject_table1" class="subject_button">
                                         <div id="subject_table1_1">
-                                            {{ subject.id }}
+                                          <strong> {{subject.code}} </strong>
                                             {{ subject.name }} - {{ subject.professor1 }}
                                         </div>
                                         <div id="subject_table3">
@@ -1936,7 +2074,7 @@ ctx.font = '12px Arial';
                                         {% endif %}
                                         / {{ subject.credit }} 학점
                                                 <!-- TEMP -->
-                                            /  {{subject.select_person}} 사람이 선택
+                                            / 총 {{subject.select_person}} 명 선택
                                                 <!-- TEMP -->
 
                                     </div>
@@ -2120,12 +2258,7 @@ ctx.font = '12px Arial';
     </select>
 </div>
 <div id=bottom_design>
-    <div style="color:black; font-size:10px; text-align:left;margin-bottom:20px;">
-    <div>* 주의사항</div>
-    <div>1. 서버 관리로 인해 새벽에 잠시 실행이 불가할 수 있습니다</div>
-    <div>2. 아이폰,아이패드에서는 실행이 제대로 이루어지지 않을 수 있습니다</div>
-    <div>3. 사파리에서는 실행이 제대로 이루어지지 않을 수 있습니다</div></div>
-    학사편람 바로보기->  <a class="bottom_text" href="https://college.gist.ac.kr/college/sub03_01_05_10_09.do">https://college.gist.ac.kr/college/sub03_01_05_10_09.do</a>
+    학사편람 바로보기->  <a class="bottom_text" href="https://college.gist.ac.kr/college/sub03_01_05_10_10.do;jsessionid=6D58D785CD5D6CF77991B22FECEC2131">https://college.gist.ac.kr/college/sub03_01_05_10_10.do;jsessionid=6D58D785CD5D6CF77991B22FECEC2131</a>
     <div id="login_copyright1">
         Made by. MOP(이주찬, 이준명, 김여원, 김소정)
     </div>
