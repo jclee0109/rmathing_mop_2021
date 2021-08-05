@@ -80,4 +80,4 @@ class Evaluation(models.Model):
 class SubjectEval(models.Model):
     subject = models.ForeignKey(SubjectInfo, blank=True, null=True, on_delete=models.CASCADE)
     evaluation = models.ForeignKey(Evaluation, blank=True, null=True, on_delete=models.CASCADE)
-    
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)

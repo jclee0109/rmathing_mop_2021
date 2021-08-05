@@ -107,8 +107,6 @@ def mytable(request, user_id):
     #             tmp_sub.select_person += 1
     #     tmp_sub.save()
 
-
-
     subject_add_list = Subject_add.objects.filter(user_id=request.user.id).values('subject_add_id').distinct().order_by(
         'subject_add_id')
     subject_selected_list = []
@@ -162,15 +160,29 @@ def mytable(request, user_id):
         qs = qs.filter(department=department)
 
     """
+    평가 한 사람 처리
+    """
+    sub_eval_user_all_list = SubjectEval.objects.all().filter(user_id=request.user.id)
+    sub_eval_write_list = subject_selected_list
+    for i in range(len(list(sub_eval_user_all_list))):
+        for j in reversed(range(len(list(subject_selected_list)))):
+            if sub_eval_user_all_list[i].id == subject_selected_list[j].id:
+                del sub_eval_write_list[j]
+
+    """
     과목 평가
     """
     eval = pd.DataFrame(list(Evaluation.objects.all().values()))
     subject = pd.DataFrame(list(SubjectInfo.objects.all().values()))
-    subject_eval = subject.merge(eval, left_on = 'id', right_on = 'subject_id').loc[:, ['name', 'professor1', 'professor2', 'year', 'session', 'test', 'assignment', 'grade', 'comment', 'subject_id']]
+    subject_eval = subject.merge(eval, left_on='id', right_on='subject_id').loc[:,
+                   ['name', 'professor1', 'professor2', 'year', 'session', 'test', 'assignment', 'grade', 'comment',
+                    'subject_id']]
     subject_eval = subject_eval.groupby(['name', 'professor1']).mean().reset_index()
     subject_eval_list = []
     eval_list = []
-    subject_eval_comment = subject.merge(eval, left_on = 'id', right_on = 'subject_id').loc[:, ['name', 'professor1', 'professor2', 'year', 'session', 'test', 'assignment', 'grade', 'comment', 'subject_id']]
+    subject_eval_comment = subject.merge(eval, left_on='id', right_on='subject_id').loc[:,
+                           ['name', 'professor1', 'professor2', 'year', 'session', 'test', 'assignment', 'grade',
+                            'comment', 'subject_id']]
 
     for i in range(subject_eval.shape[0]):
         subject_eval_list.append(subject_eval.iloc[i].to_dict())
@@ -178,7 +190,8 @@ def mytable(request, user_id):
         eval_list.append(subject_eval_comment.iloc[i].to_dict())
 
     context = {'subject_list': qs, 'subject_selected_list': subject_selected_list,
-               'sum': sum, 'eval_list':eval_list, 'subject_eval_list' : subject_eval_list}
+               'sum': sum, 'eval_list': eval_list, 'subject_eval_list': subject_eval_list,
+               'sub_eval_write':sub_eval_write_list}
     return render(request, 'timetable/main.html', context)
 
 
@@ -865,13 +878,16 @@ def eval_add(request, subject_id):
     """
     평가 등록
     """
+    user = request.user
     sub_ject = SubjectInfo.objects.get(id=subject_id)
     evaluation = Evaluation(subject=sub_ject, comment=request.POST.get('content'))
     evaluation.save()
+    subject_eval = SubjectEval(evaluation=evaluation, subject=sub_ject, user=user)
+    subject_eval.save()
     return redirect('timetable:mytable', user_id=request.user.id)
 
+
 def eval_info(request):
-    
     return render(request, 'timetable/main.html', context)
 
 # def data_save(request):

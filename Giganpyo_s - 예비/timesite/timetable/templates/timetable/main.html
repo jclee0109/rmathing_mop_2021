@@ -1696,12 +1696,26 @@ ctx.font = '12px Arial';
                                 / {{ subject.credit }} 학점
                             </div>
 
-
                                 <a href="{% url 'timetable:del' subject.id %}"><button method="get" id="button_subject_table" onclick="del">  DEL  </button></a>
-                                                <!-- TEMP -->
+
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                    {% else %}
+                    <tr id="tr_noline">
+                        <td colspan="3">강의가 없습니다.</td>
+                    </tr>
+                    {% endif %}
+
+
+                                        <!-- TEMP -->
+                    {% if sub_eval_write %}
+                    {% for subject in sub_eval_write %}
                                                 <form action="{% url 'timetable:eval_add' subject.id %}" method="post">
                                                     {% csrf_token %}
-                                                    <div style="font-size: 10px;"><strong>수강후기 작성</strong></div>
+                                                    <div style="font-size: 10px;"><strong>{{ subject.name }} 수강후기 작성</strong></div>
                                                     <textarea placeholder="한줄평을 남겨주세요." name="content" id="content" rows="5"></textarea>
                                                     <div>
                                                         <div>
@@ -1779,17 +1793,11 @@ ctx.font = '12px Arial';
                                                     </div>
                                                     <input type="submit" value="평가등록">
                                                 </form>
-
                                                 <!-- TEMP -->
-                            </div>
-                        </td>
-                    </tr>
                     {% endfor %}
-                    {% else %}
-                    <tr id="tr_noline">
-                        <td colspan="3">강의가 없습니다.</td>
-                    </tr>
                     {% endif %}
+
+
                     </tbody>
                 </table>
             </div>

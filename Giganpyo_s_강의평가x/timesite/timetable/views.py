@@ -875,8 +875,12 @@ def delete(request, subject_id):
         tmp_delete = SubjectInfo.objects.get(id=subject_id)
         temp = Subject_add.objects.filter(subject_add_id=subject_id, user_id=request.user.id)
         temp.delete()
-        tmp_delete.select_person -= 1
-        tmp_delete.save()
+        if tmp_delete.select_person == 0:
+            tmp_delete.save()
+        else:
+            tmp_delete.select_person -= 1
+            tmp_delete.save()
+
     return redirect('timetable:mytable', user_id=request.user.id)
 
 
