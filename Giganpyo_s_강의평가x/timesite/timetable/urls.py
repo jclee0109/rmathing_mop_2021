@@ -10,4 +10,5 @@ urlpatterns = [
     path('del/<int:subject_id>/', views.delete, name='del'),
     path('eval_add/<int:subject_id>/', views.eval_add, name='eval_add'),
     # path('data/',views.data_save, name = 'data_save'),
+    # path('data/',views.data_save, name = 'data_save'),
 ]
