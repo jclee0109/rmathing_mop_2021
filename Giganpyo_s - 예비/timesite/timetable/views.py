@@ -163,7 +163,7 @@ def mytable(request, user_id):
     평가 한 사람 처리
     """
     sub_eval_user_all_list = SubjectEval.objects.all().filter(user_id=request.user.id)
-    sub_eval_write_list = subject_selected_list
+    sub_eval_write_list = subject_selected_list.copy()
     for i in range(len(list(sub_eval_user_all_list))):
         for j in reversed(range(len(list(subject_selected_list)))):
             if sub_eval_user_all_list[i].id == subject_selected_list[j].id:
