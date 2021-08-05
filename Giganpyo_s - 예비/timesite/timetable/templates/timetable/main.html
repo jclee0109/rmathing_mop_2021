@@ -361,6 +361,11 @@ width:297px!important;
 </style>
     <style >
     @media  only screen and  (min-width:1024px) {
+    
+    .subject_button5{
+      
+    }
+
       #table2 { display: none; }
     #table1 { position:relative;}
     #myCanvas2{
@@ -440,7 +445,7 @@ padding: 10px;
 }
 .subject_button2 {
   display: grid;
-  grid-template-columns: 1fr 90px;
+  grid-template-columns: 1fr 90px 90px;
 }
 table {
    border: 0.1px solid #444444;
@@ -1363,9 +1368,26 @@ ctx.font = '12px Arial';
         ctx2.scale(1/4, 1/4);
         bag_counts++;
       }
-
-      function viewDisplay(){
+</script>
+<script>
+      function viewDisplay(a){
+          var dis = document.getElementById("clickToView-"+a);
+          if(dis.style.display=='none'){
+              dis.style.display = 'block';
+          }else{
+              dis.style.display = 'none';
+          }
+      }
+      function viewDisplay2(){
           var dis = document.getElementById("clickToView");
+          if(dis.style.display=='none'){
+              dis.style.display = 'block';
+          }else{
+              dis.style.display = 'none';
+          }
+      }
+      function viewDisplay3(a){
+          var dis = document.getElementById("view-"+a);
           if(dis.style.display=='none'){
               dis.style.display = 'block';
           }else{
@@ -1392,7 +1414,133 @@ ctx.font = '12px Arial';
 <div class="container my-3">
     <!--테이블 생성-->
     <div class="line">
-        <div>&nbsp</div>
+      <div>
+        <button id="view_write_review" onclick=location.href="javascript:viewDisplay2();">수강평 작성</button>
+        <div id="clickToView" style="display:none; position: absolute;">
+            <div id="write_review">
+                <table class = "table">
+                    <tbody>
+                    {% if subject_selected_list %}
+                    {% for subject in subject_selected_list %}
+                    <tr id="tr_noline" class="text-center">
+                        <td class = "text-left">
+                            <div  class="subject_button2">
+                              <div id="result_bag1">
+                                {{ subject.name }} <br> {{ subject.professor1 }}
+                              <br>
+                                {% if subject.count == 1 %}
+                                / {{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}
+                                {% elif subject.count == 2 %}
+                                / {{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}
+                                / {{ subject.day2 }} {{ subject.start_time2 }}~{{ subject.finish_time2 }}
+                                {% elif subject.count == 3 %}
+                                {{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}
+                                / {{ subject.day2 }} {{ subject.start_time2 }}~{{ subject.finish_time2 }}
+                                / {{ subject.day3 }} {{ subject.start_time3 }}~{{ subject.finish_time3 }}
+                                {% elif subject.count == 4 %}
+                                / {{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}
+                                / {{ subject.day2 }} {{ subject.start_time2 }}~{{ subject.finish_time2 }}
+                                / {{ subject.day3 }} {{ subject.start_time3 }}~{{ subject.finish_time3 }}
+                                / {{ subject.day4 }} {{ subject.start_time4 }}~{{ subject.finish_time4 }}
+                                {% endif %}
+                                / {{ subject.credit }} 학점
+
+                            <form action="{% url 'timetable:eval_add' subject.id %}" method="post">
+                                {% csrf_token %}
+                                <div>한줄평</div>
+                                <textarea placeholder="한줄평을 남겨주세요." name="content" id="content" rows="5"></textarea>
+                                <div>
+                                    <div>
+                                        <span style="font-size: 12px;">성적</span>
+                                        <label class="select_score" for="grade_5">
+                                            <input id="grade_5" type="radio" name="grade" value="5">
+                                            <span class="circle">A</span>
+                                        </label>
+                                        <label class="select_score" for="grade_4">
+                                            <input id="grade_4" type="radio" name="grade" value="4">
+                                            <span class="circle">B</span>
+                                        </label>
+                                        <label class="select_score" for="grade_3">
+                                            <input id="grade_3" type="radio" name="grade" value="3">
+                                            <span class="circle">C</span>
+                                        </label>
+                                        <label class="select_score" for="grade_2">
+                                            <input id="grade_2" type="radio" name="grade" value="2">
+                                            <span class="circle">D</span>
+                                        </label>
+                                        <label class="select_score" for="grade_1">
+                                            <input id="grade_1" type="radio" name="grade" value="1">
+                                            <span class="circle">F</span>
+                                        </label>
+                                    </div>
+
+                                    <div>
+                                        <span style="font-size: 12px;">과제</span>
+                                        <label class="select_homework" for="work_5">
+                                            <input id="work_5" type="radio" name="homework" value="5">
+                                            <span class="circle">A</span>
+                                        </label>
+                                        <label class="select_homework" for="work_4">
+                                            <input id="work_4" type="radio" name="homework" value="4">
+                                            <span class="circle">B</span>
+                                        </label>
+                                        <label class="select_homework" for="work_3">
+                                            <input id="work_3" type="radio" name="homework" value="3">
+                                            <span class="circle">C</span>
+                                        </label>
+                                        <label class="select_homework" for="grade_2">
+                                            <input id="work_2" type="radio" name="homework" value="2">
+                                            <span class="circle">D</span>
+                                        </label>
+                                        <label class="select_homework" for="grade_1">
+                                            <input id="work_1" type="radio" name="homework" value="1">
+                                            <span class="circle">F</span>
+                                        </label>
+                                    </div>
+
+                                    <div>
+                                        <span style="font-size: 12px;">시험</span>
+                                        <label class="select_exam" for="exam_5">
+                                            <input id="exam_5" type="radio" name="exam" value="5">
+                                            <span class="circle">A</span>
+                                        </label>
+                                        <label class="select_exam" for="exam_4">
+                                            <input id="exam_4" type="radio" name="exam" value="4">
+                                            <span class="circle">B</span>
+                                        </label>
+                                        <label class="select_exam" for="exam_3">
+                                            <input id="exam_3" type="radio" name="exam" value="3">
+                                            <span class="circle">C</span>
+                                        </label>
+                                        <label class="select_exam" for="exam_2">
+                                            <input id="exam_2" type="radio" name="exam" value="2">
+                                            <span class="circle">D</span>
+                                        </label>
+                                        <label class="select_exam" for="exam_1">
+                                            <input id="exam_1" type="radio" name="exam" value="1">
+                                            <span class="circle">F</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <input type="submit" value="평가등록">
+                            </form>
+                            </div>
+
+
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <tr id="tr_noline">
+                        <td colspan="3">강의가 없습니다.</td>
+                    </tr>
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
         <div id="login_back">
             <canvas
                     id="myCanvas1"
@@ -1664,20 +1812,8 @@ ctx.font = '12px Arial';
                             <div  class="subject_button2">
                               <div id="result_bag1">
                                 {{ subject.name }} - {{ subject.professor1 }}
-                                {% for subject_eval in subject_eval_list %}
-                                {% if subject.name == subject_eval.name %}
-                                {% if subject.professor1 == subject_eval.professor1 %}
-                                / 시험 : {{ subject_eval.test }} / 과제 : {{ subject_eval.assignment }} / 성적 : {{ subject_eval.grade }} <br>
-                                {% endif %}
-                                {% endif %}
-                                {% endfor %}
-                                {% for eval in eval_list %}
-                                {% if subject.name == eval.name %}
-                                {% if subject.professor1 == eval.professor1 %}
-                                / {{ eval.comment }} / {{ eval.test }} / {{ eval.assignment }} / {{ eval.grade }} / <br>
-                                {% endif %}
-                                {% endif %}
-                                {% endfor %}
+                                
+                              
                                 {% if subject.count == 1 %}
                                 / {{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}
                                 {% elif subject.count == 2 %}
@@ -1695,7 +1831,14 @@ ctx.font = '12px Arial';
                                 {% endif %}
                                 / {{ subject.credit }} 학점
                             </div>
+                            <button id="view_review-{{ subject.id }}" onclick=location.href="javascript:viewDisplay3({{ subject.id }});">수강평보기</button>
+                            <a href="{% url 'timetable:del' subject.id %}"><button method="get" id="button_subject_table" onclick="del">  DEL  </button></a>
 
+<<<<<<< HEAD
+                            </div>
+                        </td>
+                    </tr>
+=======
                                 <a href="{% url 'timetable:del' subject.id %}"><button method="get" id="button_subject_table" onclick="del">  DEL  </button></a>
 
                             </div>
@@ -1794,6 +1937,7 @@ ctx.font = '12px Arial';
                                                     <input type="submit" value="평가등록">
                                                 </form>
                                                 <!-- TEMP -->
+>>>>>>> abbbd556f0cbd90d0fdd3ac7a0e5a584712cc162
                     {% endfor %}
                     {% endif %}
 
@@ -1849,7 +1993,6 @@ ctx.font = '12px Arial';
                 </form>
 
 
-
                 <!-- checkbox -->
                 <div class="container my-3">
                     <div class = "table">
@@ -1891,63 +2034,7 @@ ctx.font = '12px Arial';
                                             / {{ subject.credit }} 학점
 
                                         </div>
-                                        <!--<a href=""><button method="get" id="button_subject_review" onclick="view_review">  수강평보기  </button></a>-->
-                                        <button id="view_review" onclick=location.href="javascript:viewDisplay();">수강평보기</button>
-
-                                        <div id="clickToView" style="display:none;">
-                                            <div id="review_score">
-                                                <table style="margin: auto; border:none;">
-                                                    <tr>
-                                                        <td>A-</td>
-                                                        <td>A</td>
-                                                        <td>B</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>성적</td>
-                                                        <td>과제</td>
-                                                        <td>시험</td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                            <div id="review_score_table">
-                                                <table style="margin: auto; border:none;">
-                                                    <tr>
-                                                        <td>A</td>
-                                                        <td>A</td>
-                                                        <td>B</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>성적</td>
-                                                        <td>과제</td>
-                                                        <td>시험</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="3"><strong>한줄평</strong></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="3">추천합니다!</td>
-                                                    </tr>
-                                                </table>
-                                                <table style="margin: auto; border:none;">
-                                                    <tr>
-                                                        <td>A</td>
-                                                        <td>B</td>
-                                                        <td>B</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>성적</td>
-                                                        <td>과제</td>
-                                                        <td>시험</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="3"><strong>한줄평</strong></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="3">추천해요</td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                        </div>
+                                        
 
                                     </div>
 
@@ -2017,7 +2104,84 @@ ctx.font = '12px Arial';
 
                 </form>
             </div>
+            
+            <div id="result_bag">
+              <div id="result_back">
 
+                  <div id="result">강의평가 </div></div>
+              <table class = "table">
+                  <tbody>
+                  {% if subject_selected_list %}
+                  {% for subject in subject_selected_list %}
+                  <tr id="tr_noline" class="text-center">
+                      <td class = "text-left" id="view-{{ subject.id }}"style="display:none;">
+                          <div  class="subject_button2">
+                            <div id="result_bag1" class="subject_button5" style="width: 300px;">
+                              {{ subject.name }} 
+                              {% for subject_eval in subject_eval_list %}
+                              {% if subject.name == subject_eval.name %}
+                              {% if subject.professor1 == subject_eval.professor1 %}
+                                <div id="review_score">
+                                    <table style="margin: auto; border:none;">
+                                        <tr>
+                                            <td>{{ subject_eval.grade }}</td>
+                                            <td>{{ subject_eval.assignment }}</td>
+                                            <td>{{ subject_eval.test }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>성적</td>
+                                            <td>과제</td>
+                                            <td>시험</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                {% endif %}
+                              {% endif %}
+                              {% endfor %}
+                          </div>
+                          <button id="view_review-{{ subject.id }}" onclick=location.href="javascript:viewDisplay({{ subject.id }});">수강평보기</button>
+                          </div>
+                          
+                              
+                                        <div id="clickToView-{{ subject.id }}" style="display:none;">
+                                          {% for eval in eval_list %}
+                                          {% if subject.name == eval.name %}
+                                          {% if subject.professor1 == eval.professor1 %}
+                                          
+                                          
+                                            <div id="review_score">
+                                                <table style="margin: auto; border:none;">
+                                                    <tr>
+                                                        <td>{{ eval.grade }}</td>
+                                                        <td>{{ eval.assignment }}</td>
+                                                        <td>{{ eval.test }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>성적</td>
+                                                        <td>과제</td>
+                                                        <td>시험</td>
+                                                    </tr>
+                                                    
+                                                </table>
+                                                {{ eval.comment }}
+                                            </div>
+                                            {% endif %}
+                                          {% endif %}
+                                          {% endfor %}
+                                          </div>
+                                           
+                      </td>
+                      
+                  </tr>
+                  {% endfor %}
+                  {% else %}
+                  <tr id="tr_noline">
+                      <td colspan="3">강의가 없습니다.</td>
+                  </tr>
+                  {% endif %}
+                  </tbody>
+              </table>
+          </div>
             <!-- checkbox -->
             <div class="container my-3">
                 <div class = "table1">
