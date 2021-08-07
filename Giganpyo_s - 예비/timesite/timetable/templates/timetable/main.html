@@ -1420,7 +1420,7 @@ ctx.font = '12px Arial';
             <div id="write_review">
                 <table class = "table">
                     <tbody>
-                    {% if subject_selected_list %}
+                    {% if sub_eval_write %}
                     {% for subject in sub_eval_write %}
                     <tr id="tr_noline" class="text-center">
                         <td class = "text-left">
@@ -1453,23 +1453,24 @@ ctx.font = '12px Arial';
                                     <div>
                                         <span style="font-size: 12px;">성적</span>
                                         <label class="select_score" for="grade_5">
-                                            <input id="grade_5" type="radio" name="grade" value="5">
+                                            {{ subject.id }}=
+                                            <input id="grade_5" type="radio" name="{{ subject.id }}grade" value="5">
                                             <span class="circle">A</span>
                                         </label>
                                         <label class="select_score" for="grade_4">
-                                            <input id="grade_4" type="radio" name="grade" value="4">
+                                            <input id="grade_4" type="radio" name="{{ subject.id }}grade" value="4">
                                             <span class="circle">B</span>
                                         </label>
                                         <label class="select_score" for="grade_3">
-                                            <input id="grade_3" type="radio" name="grade" value="3">
+                                            <input id="grade_3" type="radio" name="{{ subject.id }}grade" value="3">
                                             <span class="circle">C</span>
                                         </label>
                                         <label class="select_score" for="grade_2">
-                                            <input id="grade_2" type="radio" name="grade" value="2">
+                                            <input id="grade_2" type="radio" name="{{ subject.id }}grade" value="2">
                                             <span class="circle">D</span>
                                         </label>
                                         <label class="select_score" for="grade_1">
-                                            <input id="grade_1" type="radio" name="grade" value="1">
+                                            <input id="grade_1" type="radio" name="{{ subject.id }}grade" value="1">
                                             <span class="circle">F</span>
                                         </label>
                                     </div>
@@ -1477,23 +1478,23 @@ ctx.font = '12px Arial';
                                     <div>
                                         <span style="font-size: 12px;">과제</span>
                                         <label class="select_homework" for="work_5">
-                                            <input id="work_5" type="radio" name="homework" value="5">
+                                            <input id="work_5" type="radio" name="{{ subject.id }}homework" value="5">
                                             <span class="circle">A</span>
                                         </label>
                                         <label class="select_homework" for="work_4">
-                                            <input id="work_4" type="radio" name="homework" value="4">
+                                            <input id="work_4" type="radio" name="{{ subject.id }}homework" value="4">
                                             <span class="circle">B</span>
                                         </label>
                                         <label class="select_homework" for="work_3">
-                                            <input id="work_3" type="radio" name="homework" value="3">
+                                            <input id="work_3" type="radio" name="{{ subject.id }}homework" value="3">
                                             <span class="circle">C</span>
                                         </label>
                                         <label class="select_homework" for="grade_2">
-                                            <input id="work_2" type="radio" name="homework" value="2">
+                                            <input id="work_2" type="radio" name="{{ subject.id }}homework" value="2">
                                             <span class="circle">D</span>
                                         </label>
                                         <label class="select_homework" for="grade_1">
-                                            <input id="work_1" type="radio" name="homework" value="1">
+                                            <input id="work_1" type="radio" name="{{ subject.id }}homework" value="1">
                                             <span class="circle">F</span>
                                         </label>
                                     </div>
@@ -1501,23 +1502,23 @@ ctx.font = '12px Arial';
                                     <div>
                                         <span style="font-size: 12px;">시험</span>
                                         <label class="select_exam" for="exam_5">
-                                            <input id="exam_5" type="radio" name="exam" value="5">
+                                            <input id="exam_5" type="radio" name="{{ subject.id }}exam" value="5">
                                             <span class="circle">A</span>
                                         </label>
                                         <label class="select_exam" for="exam_4">
-                                            <input id="exam_4" type="radio" name="exam" value="4">
+                                            <input id="exam_4" type="radio" name="{{ subject.id }}exam" value="4">
                                             <span class="circle">B</span>
                                         </label>
                                         <label class="select_exam" for="exam_3">
-                                            <input id="exam_3" type="radio" name="exam" value="3">
+                                            <input id="exam_3" type="radio" name="{{ subject.id }}exam" value="3">
                                             <span class="circle">C</span>
                                         </label>
                                         <label class="select_exam" for="exam_2">
-                                            <input id="exam_2" type="radio" name="exam" value="2">
+                                            <input id="exam_2" type="radio" name="{{ subject.id }}exam" value="2">
                                             <span class="circle">D</span>
                                         </label>
                                         <label class="select_exam" for="exam_1">
-                                            <input id="exam_1" type="radio" name="exam" value="1">
+                                            <input id="exam_1" type="radio" name="{{ subject.id }}exam" value="1">
                                             <span class="circle">F</span>
                                         </label>
                                     </div>

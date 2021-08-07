@@ -162,12 +162,13 @@ def mytable(request, user_id):
     """
     평가 한 사람 처리
     """
-    sub_eval_user_all_list = SubjectEval.objects.all().filter(user_id=request.user.id)
+    sub_eval_user_all_list = SubjectEval.objects.all().filter(user_id=request.user.id).order_by('id')
     sub_eval_write_list = subject_selected_list.copy()
     for i in range(len(list(sub_eval_user_all_list))):
-        for j in reversed(range(len(list(subject_selected_list)))):
-            if sub_eval_user_all_list[i].id == subject_selected_list[j].id:
+        for j in range(len(list(sub_eval_write_list))):
+            if sub_eval_user_all_list[i].subject_id == sub_eval_write_list[j].id:
                 del sub_eval_write_list[j]
+                break
 
     """
     과목 평가
@@ -191,7 +192,7 @@ def mytable(request, user_id):
 
     context = {'subject_list': qs, 'subject_selected_list': subject_selected_list,
                'sum': sum, 'eval_list': eval_list, 'subject_eval_list': subject_eval_list,
-               'sub_eval_write':sub_eval_write_list}
+               'sub_eval_write': sub_eval_write_list}
     return render(request, 'timetable/main.html', context)
 
 
@@ -879,8 +880,14 @@ def eval_add(request, subject_id):
     평가 등록
     """
     user = request.user
+    gr_ade = str(subject_id) + "grade"
+    assign_ment = str(subject_id) + "homework"
+    t_est = str(subject_id) + "exam"
     sub_ject = SubjectInfo.objects.get(id=subject_id)
-    evaluation = Evaluation(subject=sub_ject, comment=request.POST.get('content'))
+    evaluation = Evaluation(subject=sub_ject, comment=request.POST.get('content'),
+                            grade=request.POST.get(gr_ade),
+                            assignment=request.POST.get(assign_ment),
+                            test=request.POST.get(t_est))
     evaluation.save()
     subject_eval = SubjectEval(evaluation=evaluation, subject=sub_ject, user=user)
     subject_eval.save()
