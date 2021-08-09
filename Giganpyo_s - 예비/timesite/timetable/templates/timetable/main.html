@@ -403,7 +403,18 @@ width:297px!important;
 </style>
     <style >
     @media  only screen and  (min-width:1024px) {
-    
+      #result_bag_0{
+border-radius:5px;
+width:400px;
+margin:0;
+height: 400px;
+}
+#result_bag0{
+border-radius:5px;
+width:400px;
+margin:0;
+height: 100px;
+}
     .subject_button5{
       
     }
@@ -1522,16 +1533,20 @@ ctx.font = '12px Arial';
       }
 </script>
 <script>
+    var flag=0;
       function viewDisplay(a){
-          var dis = document.getElementById("clickToView-"+a);
+        var dis = document.getElementById("clickToView-"+a);
           if(dis.style.display=='none'){
+            
               dis.style.display = 'block';
-          }else{
+          }
+          else{
+           
               dis.style.display = 'none';
           }
       }
       function viewDisplay2(){
-          var dis = document.getElementById("clickToView");
+          var dis = document.getElementById("clickToView");x
           if(dis.style.display=='none'){
               dis.style.display = 'block';
           }else{
@@ -1541,7 +1556,20 @@ ctx.font = '12px Arial';
       function viewDisplay3(a){
           var dis = document.getElementById("view-"+a);
           if(dis.style.display=='none'){
+            if (flag==0){
+              var dis = document.getElementById("view-"+a);
+              flag=a;
               dis.style.display = 'block';
+            }
+            else {
+              var dis = document.getElementById("view-"+flag);
+            dis.style.display = 'none';
+            var dis = document.getElementById("view-"+a);
+              flag=a;
+              dis.style.display = 'block';
+            
+            }
+            
           }else{
               dis.style.display = 'none';
           }
@@ -1574,6 +1602,7 @@ ctx.font = '12px Arial';
                     <tbody>
                     {% if sub_eval_write %}
                     {% for subject in sub_eval_write %}
+                    <div id="eval_box-{{ subject.id }}">
                     <tr id="tr_noline" class="text-center">
                         <td class = "text-left" style="width: 200px;">
                             <div id="review_subject">
@@ -1598,28 +1627,28 @@ ctx.font = '12px Arial';
                                 / {{ subject.credit }} 학점
 
                             <form action="{% url 'timetable:eval_add' subject.id %}" method="post">
-                                {% csrf_token %}
+                                {% csrf_token %} 
                                 <textarea placeholder="한줄평을 남겨주세요." name="content" id="content" rows="5"></textarea>
                                 <div>
                                     <div style="margin: 3px;">
                                         <span style="font-size: 12px;">성적</span>
-                                        <label class="select_score" for="grade_5-{{ subject.id }}">
+                                        <label class="select_score-{{ subject.id }}" for="grade_5-{{ subject.id }}">
                                             <input id="grade_5-{{ subject.id }}" type="radio" name="grade-{{ subject.id }}" value="5">
                                             <span>A</span>
                                         </label>
-                                        <label class="select_score" for="grade_4-{{ subject.id }}">
+                                        <label class="select_score-{{ subject.id }}" for="grade_4-{{ subject.id }}">
                                             <input id="grade_4-{{ subject.id }}" type="radio" name="grade-{{ subject.id }}" value="4">
                                             <span>B</span>
                                         </label>
-                                        <label class="select_score" for="grade_3-{{ subject.id }}">
+                                        <label class="select_score-{{ subject.id }}" for="grade_3-{{ subject.id }}">
                                             <input id="grade_3-{{ subject.id }}" type="radio" name="grade-{{ subject.id }}" value="3">
                                             <span>C</span>
                                         </label>
-                                        <label class="select_score" for="grade_2-{{ subject.id }}">
+                                        <label class="select_score-{{ subject.id }}" for="grade_2-{{ subject.id }}">
                                             <input id="grade_2-{{ subject.id }}" type="radio" name="grade-{{ subject.id }}" value="2">
                                             <span>D</span>
                                         </label>
-                                        <label class="select_score" for="grade_1-{{ subject.id }}">
+                                        <label class="select_score-{{ subject.id }}" for="grade_1-{{ subject.id }}">
                                             <input id="grade_1-{{ subject.id }}" type="radio" name="grade-{{ subject.id }}" value="1">
                                             <span>F</span>
                                         </label>
@@ -1627,23 +1656,23 @@ ctx.font = '12px Arial';
 
                                     <div style="margin: 3px;">
                                         <span style="font-size: 12px;">과제</span>
-                                        <label class="select_homework" for="work_5-{{ subject.id }}">
+                                        <label class="select_homework-{{ subject.id }}" for="work_5-{{ subject.id }}">
                                             <input id="work_5-{{ subject.id }}" type="radio" name="homework-{{ subject.id }}" value="5">
                                             <span>A</span>
                                         </label>
-                                        <label class="select_homework" for="work_4-{{ subject.id }}">
+                                        <label class="select_homework-{{ subject.id }}" for="work_4-{{ subject.id }}">
                                             <input id="work_4-{{ subject.id }}" type="radio" name="homework-{{ subject.id }}" value="4">
                                             <span>B</span>
                                         </label>
-                                        <label class="select_homework" for="work_3-{{ subject.id }}">
+                                        <label class="select_homework-{{ subject.id }}" for="work_3-{{ subject.id }}">
                                             <input id="work_3-{{ subject.id }}" type="radio" name="homework-{{ subject.id }}" value="3">
                                             <span>C</span>
                                         </label>
-                                        <label class="select_homework" for="work_2-{{ subject.id }}">
+                                        <label class="select_homework-{{ subject.id }}" for="work_2-{{ subject.id }}">
                                             <input id="work_2-{{ subject.id }}" type="radio" name="homework-{{ subject.id }}" value="2">
                                             <span>D</span>
                                         </label>
-                                        <label class="select_homework" for="work_1-{{ subject.id }}">
+                                        <label class="select_homework-{{ subject.id }}" for="work_1-{{ subject.id }}">
                                             <input id="work_1-{{ subject.id }}" type="radio" name="homework-{{ subject.id }}" value="1">
                                             <span>F</span>
                                         </label>
@@ -1676,11 +1705,10 @@ ctx.font = '12px Arial';
                                 <input type="submit" value="평가등록" id="write_finish_button">
                             </form>
                             </div>
-
-
                             </div>
                         </td>
                     </tr>
+                    </div>
                     {% endfor %}
                     {% else %}
                     <tr id="tr_noline">
@@ -2152,8 +2180,8 @@ ctx.font = '12px Arial';
                 </form>
             </div>
             
-            <div id="result_bag">
-              <div id="result_back">
+            <div id="result_bag_0">
+              <div id="result_back_0">
 
                   <div id="result">강의평가 </div></div>
               <table class = "table">
@@ -2163,7 +2191,7 @@ ctx.font = '12px Arial';
                   <tr id="tr_noline" class="text-center">
                       <td class = "text-left" id="view-{{ subject.id }}"style="display:none;">
                           <div  class="subject_button2">
-                            <div id="result_bag1" class="subject_button5" style="width: 300px;">
+                            <div id="result_bag0" class="subject_button5" style="width: 300px;">
                               {{ subject.name }} 
                               {% for subject_eval in subject_eval_list %}
                               {% if subject.name == subject_eval.name %}
