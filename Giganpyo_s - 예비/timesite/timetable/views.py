@@ -880,9 +880,9 @@ def eval_add(request, subject_id):
     평가 등록
     """
     user = request.user
-    gr_ade = str(subject_id) + "grade"
-    assign_ment = str(subject_id) + "homework"
-    t_est = str(subject_id) + "exam"
+    gr_ade = "grade-"+str(subject_id)
+    assign_ment = "homework-"+str(subject_id)
+    t_est = "exam-"+str(subject_id)
     sub_ject = SubjectInfo.objects.get(id=subject_id)
     evaluation = Evaluation(subject=sub_ject, comment=request.POST.get('content'),
                             grade=request.POST.get(gr_ade),
@@ -893,9 +893,6 @@ def eval_add(request, subject_id):
     subject_eval.save()
     return redirect('timetable:mytable', user_id=request.user.id)
 
-
-def eval_info(request):
-    return render(request, 'timetable/main.html', context)
 
 # def data_save(request):
 #     # 엑셀파일 받기
