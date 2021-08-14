@@ -203,9 +203,20 @@ def mytable(request, user_id):
     for i in range(subject_eval_comment.shape[0]):
         eval_list.append(subject_eval_comment.iloc[i].to_dict())
 
+    """
+    내가 쓴 수강평
+    """
+    my_eval = SubjectEval.objects.filter(user_id=request.user.id).values('subject_id').distinct()
+    my_eval_list = []
+    sum = 0
+    for i in range(len(my_eval)):
+        try : my_eval_list.append(SubjectInfo.objects.get(id=my_eval[i].get('subject_id'), year = 2021, session= 'spring'))
+        except SubjectInfo.DoesNotExist:
+            continue
+
     context = {'subject_list': qs, 'subject_selected_list': subject_selected_list,
                'sum': sum, 'eval_list': eval_list, 'subject_eval_list': subject_eval_list,
-               'sub_eval_write': sub_eval_write_list}
+               'sub_eval_write': sub_eval_write_list, 'my_eval_list' : my_eval_list}
     return render(request, 'timetable/main.html', context)
 
 

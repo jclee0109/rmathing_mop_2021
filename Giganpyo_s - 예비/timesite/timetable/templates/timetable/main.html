@@ -2202,7 +2202,9 @@ ctx.font = '12px Arial';
                                 {% endif %}
                                 / {{ subject.credit }} 학점
                                 /  총 {{subject.select_person}} 명 선택
+                                
                             </div>
+                          
                             <button id="view_review-{{ subject.id }}" class="select_review_button" onclick=location.href="javascript:viewDisplay3({{ subject.id }});">수강평보기</button>
                             <button id="view_review-{{ subject.id }}" class="select_review_button2" onclick=location.href="javascript:viewDisplay3({{ subject.id }});">수강평 보기</button>
                             <a href="{% url 'timetable:del' subject.id %}"><button method="get" id="button_subject_table" onclick="del">  DEL  </button></a>
