@@ -2183,25 +2183,25 @@ ctx.font = '12px Arial';
                         <td class = "text-left">
                             <div  class="subject_button2">
                               <div id="result_bag1">
-                                {{ subject.name }} - {{ subject.professor1 }}
-                                
-                              
+                                <strong>{{subject.code}}</strong>  
+                                {{ subject.name }} - {{ subject.professor1 }}<br>
                                 {% if subject.count == 1 %}
-                                / {{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}
+                                &nbsp;&nbsp;-&nbsp;{{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}
                                 {% elif subject.count == 2 %}
-                                / {{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}
+                                &nbsp;&nbsp;-&nbsp;{{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}
                                 / {{ subject.day2 }} {{ subject.start_time2 }}~{{ subject.finish_time2 }}
                                 {% elif subject.count == 3 %}
-                                {{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}
-                                / {{ subject.day2 }} {{ subject.start_time2 }}~{{ subject.finish_time2 }}
+                                &nbsp;&nbsp;-&nbsp;{{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}
+                                {{ subject.day2 }} {{ subject.start_time2 }}~{{ subject.finish_time2 }}
                                 / {{ subject.day3 }} {{ subject.start_time3 }}~{{ subject.finish_time3 }}
                                 {% elif subject.count == 4 %}
-                                / {{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}
+                                &nbsp;&nbsp;-&nbsp;{{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}
                                 / {{ subject.day2 }} {{ subject.start_time2 }}~{{ subject.finish_time2 }}
                                 / {{ subject.day3 }} {{ subject.start_time3 }}~{{ subject.finish_time3 }}
                                 / {{ subject.day4 }} {{ subject.start_time4 }}~{{ subject.finish_time4 }}
                                 {% endif %}
                                 / {{ subject.credit }} 학점
+                                /  총 {{subject.select_person}} 명 선택
                             </div>
                             <button id="view_review-{{ subject.id }}" class="select_review_button" onclick=location.href="javascript:viewDisplay3({{ subject.id }});">수강평보기</button>
                             <button id="view_review-{{ subject.id }}" class="select_review_button2" onclick=location.href="javascript:viewDisplay3({{ subject.id }});">수강평 보기</button>
@@ -2269,52 +2269,66 @@ ctx.font = '12px Arial';
 
                             <div id="result">수업목록 </div></div>
                         <div class="table_body">
-                            {% if subject_list %}
-                            {% for subject in subject_list %}
-                            <div class="text-center">
-                                <div class = "text-left">
-                                    <div id="subject_table">
-                                        <div id="subject_table1" class="subject_button">
-                                            <div id="subject_table1_1">
-                                                {{ subject.id }}
-                                                {{ subject.name }} - {{ subject.professor1 }}
+                          {% if subject_list %}
+                          {% for subject in subject_list %}
+                          <div class="text-center">
+                              <div class = "text-left">
+                                  <div id="subject_table">
+                                      <div id="subject_table1" class="subject_button">
+                                          <div id="subject_table1_1">
+                                            <strong>{{subject.code}} </strong>
+                                              {{ subject.name }}
 
-                                            </div>
-                                            <div id="subject_table3">
+                                          </div>
+                                          <div id="subject_table3">
 
-                                                <button method="get" id="button_subject_table" class="btn btn-outline-secondary" > <a href="{% url 'timetable:add' subject.id %}"> ADD </a> </button></div>
-                                        </div>
-                                        <div id="subject_table2">
-                                            {% if subject.count == 1 %}
-                                            {{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}/
-                                            {% elif subject.count == 2 %}
-                                            {{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}/
-                                            {{ subject.day2 }} {{ subject.start_time2 }}~{{ subject.finish_time2 }}/
-                                            {% elif subject.count == 3 %}
-                                            {{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}/
-                                            {{ subject.day2 }} {{ subject.start_time2 }}~{{ subject.finish_time2 }}/
-                                            {{ subject.day3 }} {{ subject.start_time3 }}~{{ subject.finish_time3 }}/
-                                            {% elif subject.count == 4 %}
-                                            {{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}/
-                                            {{ subject.day2 }} {{ subject.start_time2 }}~{{ subject.finish_time2 }}/
-                                            {{ subject.day3 }} {{ subject.start_time3 }}~{{ subject.finish_time3 }}/
-                                            {{ subject.day4 }} {{ subject.start_time4 }}~{{ subject.finish_time4 }}/
-                                            {% endif %}
-                                            {{ subject.credit }} 학점
+                                              <button method="get" id="button_subject_table" class="btn btn-outline-secondary" > <a href="{% url 'timetable:add' subject.id %}"> ADD </a> </button></div>
+                                      </div>
+                                      <div id="subject_table2">
+                                          <strong>
+                                          {{ subject.professor1 }}
+                                          </strong>
+                                          {% if subject.count == 1 %}
+                                          / {{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}
+                                          <br>
+                                          {{ subject.credit }} 학점
+                                          / 총 {{subject.select_person}} 명 선택
+                                              <!-- TEMP -->
+                                          {% elif subject.count == 2 %}
+                                          / {{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}
+                                          / {{ subject.day2 }} {{ subject.start_time2 }}~{{ subject.finish_time2 }}
+                                          <br>
+                                          {{ subject.credit }} 학점
+                                          / 총 {{subject.select_person}} 명 선택
+                                              <!-- TEMP -->
+                                          {% elif subject.count == 3 %}
+                                          / {{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}
+                                          / {{ subject.day2 }} {{ subject.start_time2 }}~{{ subject.finish_time2 }}
+                                          / {{ subject.day3 }} {{ subject.start_time3 }}~{{ subject.finish_time3 }}
+                                          / {{ subject.credit }} 학점
+                                          / 총 {{subject.select_person}} 명 선택
+                                              <!-- TEMP -->
+                                          {% elif subject.count == 4 %}
+                                          / {{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}
+                                          / {{ subject.day2 }} {{ subject.start_time2 }}~{{ subject.finish_time2 }}
+                                          / {{ subject.day3 }} {{ subject.start_time3 }}~{{ subject.finish_time3 }}
+                                          / {{ subject.day4 }} {{ subject.start_time4 }}~{{ subject.finish_time4 }}
+                                          / {{ subject.credit }} 학점
+                                          / 총 {{subject.select_person}} 명 선택
+                                          {% endif %}
+                                          
 
-                                        </div>
-                                        
+                                      </div>
+                                  </div>
 
-                                    </div>
-
-                                </div>
-                            </div>
-                            {% endfor %}
-                            {% else %}
-                            <div>
-                                <div colspan="3">강의가 없습니다.</div>
-                            </div>
-                            {% endif %}
+                              </div>
+                          </div>
+                          {% endfor %}
+                          {% else %}
+                          <div>
+                              <div colspan="3">강의가 없습니다.</div>
+                          </div>
+                          {% endif %}
                         </div>
                     </div>
                 </div>
@@ -2415,34 +2429,51 @@ ctx.font = '12px Arial';
                                 <div id="subject_table">
                                     <div id="subject_table1" class="subject_button">
                                         <div id="subject_table1_1">
-                                            {{ subject.id }}
-                                            {{ subject.name }} - {{ subject.professor1 }}
+                                          <strong> {{subject.code}} </strong>
+                                          {{ subject.name }}
                                         </div>
                                         <div id="subject_table3">
 
                                             <button method="get" id="button_subject_table" class="btn btn-outline-secondary" > <a href="{% url 'timetable:add' subject.id %}"> ADD </a> </button></div>
                                     </div>
                                     <div id="subject_table2">
+                                      <strong>
+                                        {{ subject.professor1 }}
+                                        </strong>
                                         {% if subject.count == 1 %}
-                                        {{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}/
-                                        {% elif subject.count == 2 %}
-                                        {{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}/
-                                        {{ subject.day2 }} {{ subject.start_time2 }}~{{ subject.finish_time2 }}/
-                                        {% elif subject.count == 3 %}
-                                        {{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}/
-                                        {{ subject.day2 }} {{ subject.start_time2 }}~{{ subject.finish_time2 }}/
-                                        {{ subject.day3 }} {{ subject.start_time3 }}~{{ subject.finish_time3 }}/
-                                        {% elif subject.count == 4 %}
-                                        {{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}/
-                                        {{ subject.day2 }} {{ subject.start_time2 }}~{{ subject.finish_time2 }}/
-                                        {{ subject.day3 }} {{ subject.start_time3 }}~{{ subject.finish_time3 }}/
-                                        {{ subject.day4 }} {{ subject.start_time4 }}~{{ subject.finish_time4 }}/
-                                        {% endif %}
+                                        / {{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}
+                                        <br>
                                         {{ subject.credit }} 학점
                                                 <!-- TEMP -->
-                                            /  {{subject.select_person}} 사람이 선택
+                                            / 총 {{subject.select_person}} 명 선택
+                                                <!-- TEMP -->
+                                        {% elif subject.count == 2 %}
+                                        / {{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}
+                                        / {{ subject.day2 }} {{ subject.start_time2 }}~{{ subject.finish_time2 }}
+                                        <br>
+                                        {{ subject.credit }} 학점
+                                                <!-- TEMP -->
+                                            / 총 {{subject.select_person}} 명 선택
+                                                <!-- TEMP -->
+                                        {% elif subject.count == 3 %}
+                                        / {{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}
+                                        / {{ subject.day2 }} {{ subject.start_time2 }}~{{ subject.finish_time2 }}
+                                        / {{ subject.day3 }} {{ subject.start_time3 }}~{{ subject.finish_time3 }}
+                                        / {{ subject.credit }} 학점
+                                                <!-- TEMP -->
+                                            / 총 {{subject.select_person}} 명 선택
+                                                <!-- TEMP -->
+                                        {% elif subject.count == 4 %}
+                                        / {{ subject.day1 }} {{ subject.start_time1 }}~{{ subject.finish_time1 }}
+                                        / {{ subject.day2 }} {{ subject.start_time2 }}~{{ subject.finish_time2 }}
+                                        / {{ subject.day3 }} {{ subject.start_time3 }}~{{ subject.finish_time3 }}
+                                        / {{ subject.day4 }} {{ subject.start_time4 }}~{{ subject.finish_time4 }}
+                                        / {{ subject.credit }} 학점
+                                                <!-- TEMP -->
+                                            / 총 {{subject.select_person}} 명 선택
                                                 <!-- TEMP -->
 
+                                        {% endif %}
                                     </div>
                                 </div>
 
@@ -2743,23 +2774,17 @@ ctx.font = '12px Arial';
     </select>
 </div>
 <div id=bottom_design>
-    <div style="color:black; font-size:10px; text-align:left;margin-bottom:20px;">
-    <div>* 주의사항</div>
-    <div>1. 서버 관리로 인해 새벽에 잠시 실행이 불가할 수 있습니다</div>
-    <div>2. 아이폰,아이패드에서는 실행이 제대로 이루어지지 않을 수 있습니다</div>
-    <div>3. 사파리에서는 실행이 제대로 이루어지지 않을 수 있습니다</div></div>
-    학사편람 바로보기->  <a class="bottom_text" href="https://college.gist.ac.kr/college/sub03_01_05_10_09.do">https://college.gist.ac.kr/college/sub03_01_05_10_09.do</a>
-    <div id="login_copyright1">
-        Made by. MOP(이주찬, 이준명, 김여원, 김소정)
-    </div>
-    <div id="login_copyright1">
-        Contact : 010-7665-3393 / Mail : jclee0109@gist.ac.kr
-    </div>
+  학사편람 바로보기->  <a class="bottom_text" href="https://college.gist.ac.kr/college/sub03_01_05_10_10.do;jsessionid=6D58D785CD5D6CF77991B22FECEC2131">https://college.gist.ac.kr/college/sub03_01_05_10_10.do;jsessionid=6D58D785CD5D6CF77991B22FECEC2131</a>
+  <div id="login_copyright1">
+      Made by. MOP(이주찬, 이준명, 김여원, 김소정)
+  </div>
+  <div id="login_copyright1">
+      Contact : 010-7665-3393 / Mail : jclee0109@gist.ac.kr
+  </div>
 
-    <div id="login_copyright2">
-        Copyright © 주찬쓰 Corp. All Rights Reserved.
-    </div>
-
+  <div id="login_copyright2">
+      Copyright © 주찬쓰 Corp. All Rights Reserved.
+  </div>
 
 
 </div>

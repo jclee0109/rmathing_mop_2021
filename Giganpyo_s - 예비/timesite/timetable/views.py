@@ -96,6 +96,7 @@ def mytable(request, user_id):
     day = request.GET.get('day')  # 요일
     time = request.GET.get('time')  # 시간
     department = request.GET.get('department')  # 부서
+    so = request.GET.get('so')  # 정렬기준
 
     # 과목을 선택한 사람의 수 계산하기(처음)
     # subject_add_all_list = Subject_add.objects.all().values('subject_add_id').order_by('subject_add_id')
@@ -108,21 +109,19 @@ def mytable(request, user_id):
     #     tmp_sub.save()
 
     subject_add_list = Subject_add.objects.filter(user_id=request.user.id).values('subject_add_id').distinct().order_by(
-        'subject_add_id')
+        '-id')
     subject_selected_list = []
     sum = 0
-    for i in range(len(subject_add_list)):
-        subject_selected_list.append(SubjectInfo.objects.get(id=subject_add_list[i].get('subject_add_id')))
-        # subject_add_list는 list형태인 것 같고, i는 정수형태로 받았어.
-        # 처음에 for i in subject_add_list 로 했었는데 i를 딕셔너리 형태로 받더라... 그래서 정수형으로 바꿔주고
-        # 이제 subject_add_list[i]가 딕셔너리 형태로 되어있을 건데 --> { 'subject_add_id' = 188 } 이런 식으로
-        # 나는 188의 값만 필요하니깐 subject_add_id를 키값으로 하는 값을 출력했어. 그게 get함수야
-        # 이렇게 subject_selected_list를 만들었고, 결국 얘네를 main.html에 집어넣으면서 끝나
+    try:
+        for i in range(len(subject_add_list)):
+            subject_selected_list.append(SubjectInfo.objects.get(id=subject_add_list[i].get('subject_add_id'), year = 2021, session= 'fall'))
+    except SubjectInfo.DoesNotExist:
+        pass
 
     for i in range(len(subject_selected_list)):
         sum += subject_selected_list[i].credit
 
-    qs = SubjectInfo.objects.all()
+    qs = SubjectInfo.objects.filter(year = 2021, session = 'fall')
     if is_valid_queryparam(name):
         qs = qs.filter(name__icontains=name)
     if is_valid_queryparam(professor):
@@ -159,11 +158,25 @@ def mytable(request, user_id):
     if is_valid_queryparam(department):
         qs = qs.filter(department=department)
 
+    if so == 'select':
+        qs = qs.order_by('-select_person', 'name')
+    elif so == 'name':
+        qs = qs.order_by('name')
+    else:
+        qs = qs.all()
+
     """
     평가 한 사람 처리
     """
     sub_eval_user_all_list = SubjectEval.objects.all().filter(user_id=request.user.id).order_by('id')
-    sub_eval_write_list = subject_selected_list.copy()
+    sub_eval_write_list = []
+
+    #지난 학기 과목 보내주기!
+    for i in range(len(subject_add_list)):
+        try : sub_eval_write_list.append(SubjectInfo.objects.get(id=subject_add_list[i].get('subject_add_id'), year = 2021, session= 'spring'))
+        except SubjectInfo.DoesNotExist:
+            continue
+        
     for i in range(len(list(sub_eval_user_all_list))):
         for j in range(len(list(sub_eval_write_list))):
             if sub_eval_user_all_list[i].subject_id == sub_eval_write_list[j].id:
@@ -202,10 +215,14 @@ def add(request, subject_id):
     """
     if request.method == 'GET':
         tmp_subject = SubjectInfo.objects.get(id=subject_id)
-        subject_add_list = Subject_add.objects.filter(user_id=request.user.id).values('subject_add_id').distinct()
+        subject_add_list = Subject_add.objects.filter(user_id=request.user.id).values('subject_add_id').distinct().order_by(
+        '-id')
         subject_selected_list = []
-        for i in range(len(subject_add_list)):
-            subject_selected_list.append(SubjectInfo.objects.get(id=subject_add_list[i].get('subject_add_id')))
+        try:
+            for i in range(len(subject_add_list)):
+                subject_selected_list.append(SubjectInfo.objects.get(id=subject_add_list[i].get('subject_add_id'), year = 2021, session= 'fall'))
+        except SubjectInfo.DoesNotExist:
+            pass
         overlap = False
         is_same_subject = False
         for subject in subject_selected_list:
@@ -870,6 +887,9 @@ def delete(request, subject_id):
         tmp_delete = SubjectInfo.objects.get(id=subject_id)
         temp = Subject_add.objects.filter(subject_add_id=subject_id, user_id=request.user.id)
         temp.delete()
+    if tmp_delete.select_person == 0:
+        tmp_delete.save()
+    else:
         tmp_delete.select_person -= 1
         tmp_delete.save()
     return redirect('timetable:mytable', user_id=request.user.id)
