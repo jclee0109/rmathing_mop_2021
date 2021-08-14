@@ -567,8 +567,8 @@ font-weight:2000;
 color:#57af4c;
 text-align:center;
 transition: all 0.2s;
-    width: 160px;
-    height: 50px;
+    width: 90px;
+    height: 40px;
 }
 #view_write_review:hover{
 color:#57af4c;
@@ -1469,29 +1469,29 @@ margin-right: 4px;
     <script>
       var bag_counts = 0;
       var i= 1 ;
-      var day1_g = [400];
-      var start_timeh1_g = [400];
-      var start_timem1_g =[400];
-      var finish_timeh1_g =[400];
-      var finish_timem1_g = [400];
-      var day2_g = [400];
-      var start_timeh2_g = [400];
-      var start_timem2_g = [400];
-      var finish_timeh2_g =[400];
-      var finish_timem2_g = [400];
-      var day3_g = [400];
-      var start_timeh3_g = [400];
-      var start_timem3_g = [400];
-      var finish_timeh3_g =[400];
-      var finish_timem3_g = [400];
-      var day4_g = [400];
-      var start_timeh4_g = [400];
-      var start_timem4_g = [400];
-      var finish_timeh4_g =[400];
-      var finish_timem4_g = [400];
+      var day1_g = [800];
+      var start_timeh1_g = [800];
+      var start_timem1_g =[800];
+      var finish_timeh1_g =[800];
+      var finish_timem1_g = [800];
+      var day2_g = [800];
+      var start_timeh2_g = [800];
+      var start_timem2_g = [800];
+      var finish_timeh2_g =[800];
+      var finish_timem2_g = [800];
+      var day3_g = [800];
+      var start_timeh3_g = [800];
+      var start_timem3_g = [800];
+      var finish_timeh3_g =[800];
+      var finish_timem3_g = [800];
+      var day4_g = [800];
+      var start_timeh4_g = [800];
+      var start_timem4_g = [800];
+      var finish_timeh4_g =[800];
+      var finish_timem4_g = [800];
                               
-      var s_time = [400];
-      var f_time = [400];
+      var s_time = [800];
+      var f_time = [800];
       window.onload = function determines(i) {
         var j;
 
@@ -2202,11 +2202,8 @@ ctx.font = '12px Arial';
                                 {% endif %}
                                 / {{ subject.credit }} 학점
                                 /  총 {{subject.select_person}} 명 선택
-                                
                             </div>
-                          
-                            <button id="view_review-{{ subject.id }}" class="select_review_button" onclick=location.href="javascript:viewDisplay3({{ subject.id }});">수강평보기</button>
-                            <button id="view_review-{{ subject.id }}" class="select_review_button2" onclick=location.href="javascript:viewDisplay3({{ subject.id }});">수강평 보기</button>
+                            
                             <a href="{% url 'timetable:del' subject.id %}"><button method="get" id="button_subject_table" onclick="del">  DEL  </button></a>
 
                     {% endfor %}
@@ -2216,6 +2213,38 @@ ctx.font = '12px Arial';
                     </tbody>
                 </table>
             </div>
+            <br>
+            <div id="result_bag">
+              <div id="result_back">
+
+                  <div id="result">저번 수강과목</div></div>
+              <table class = "table">
+                  <tbody>
+                    
+                    {% if my_eval_list %}
+                    {% for subject in my_eval_list %}
+                    <tr id="tr_noline" class="text-center">
+                      <td class = "text-left">
+                          <div  class="subject_button2">
+                            <div id="result_bag1">
+                              <strong>{{subject.code}}</strong>  
+                              {{ subject.name }} - {{ subject.professor1 }}  / {{ subject.credit }} 학점
+                          </div>
+                          <button id="view_review-{{ subject.id }}" class="select_review_button" onclick=location.href="javascript:viewDisplay3({{ subject.id }});">수강평보기</button>
+                          <button id="view_review-{{ subject.id }}" class="select_review_button2" onclick=location.href="javascript:viewDisplay3({{ subject.id }});">수강평보기</button>
+                          <a href="{% url 'timetable:eval_del' subject.id %}"><button method="get" id="button_subject_table" onclick="del">  DEL  </button></a>
+                    {% endfor %}
+                    {% else %}
+                    <tr id="tr_noline">
+                        <td colspan="3">강의가 없습니다.</td>
+                    </tr>
+                    {% endif %}
+
+
+                  </tbody>
+              </table>
+          </div>
+
             <div id="light_down">
                 <div id="result">검색창</div>
                 <form method="get" action="{% url 'timetable:mytable' request.user.id %}">
@@ -2604,13 +2633,13 @@ ctx.font = '12px Arial';
             <div id="result_bag_0">
                 <div id="result_back_0">
 
-                  <div id="result">강의평 보기 </div></div>
+                  <div id="result">내 강의평 보기 </div></div>
                 <div id="review_bag">
 
                 <table class = "table">
                   <tbody>
-                  {% if subject_selected_list %}
-                  {% for subject in subject_selected_list %}
+                    {% if my_eval_list %}
+                    {% for subject in my_eval_list %}
                   <tr id="tr_noline" class="text-center">
                       <td class = "text-left" id="view-{{ subject.id }}"style="display:none;">
                           <div  class="subject_button6">

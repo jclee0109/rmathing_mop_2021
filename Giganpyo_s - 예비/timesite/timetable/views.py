@@ -114,14 +114,15 @@ def mytable(request, user_id):
     sum = 0
     try:
         for i in range(len(subject_add_list)):
-            subject_selected_list.append(SubjectInfo.objects.get(id=subject_add_list[i].get('subject_add_id'), year = 2021, session= 'fall'))
+            subject_selected_list.append(
+                SubjectInfo.objects.get(id=subject_add_list[i].get('subject_add_id'), year=2021, session='fall'))
     except SubjectInfo.DoesNotExist:
         pass
 
     for i in range(len(subject_selected_list)):
         sum += subject_selected_list[i].credit
 
-    qs = SubjectInfo.objects.filter(year = 2021, session = 'fall')
+    qs = SubjectInfo.objects.filter(year=2021, session='fall')
     if is_valid_queryparam(name):
         qs = qs.filter(name__icontains=name)
     if is_valid_queryparam(professor):
@@ -171,12 +172,14 @@ def mytable(request, user_id):
     sub_eval_user_all_list = SubjectEval.objects.all().filter(user_id=request.user.id).order_by('id')
     sub_eval_write_list = []
 
-    #지난 학기 과목 보내주기!
+    # 지난 학기 과목 보내주기!
     for i in range(len(subject_add_list)):
-        try : sub_eval_write_list.append(SubjectInfo.objects.get(id=subject_add_list[i].get('subject_add_id'), year = 2021, session= 'spring'))
+        try:
+            sub_eval_write_list.append(
+                SubjectInfo.objects.get(id=subject_add_list[i].get('subject_add_id'), year=2021, session='spring'))
         except SubjectInfo.DoesNotExist:
             continue
-        
+
     for i in range(len(list(sub_eval_user_all_list))):
         for j in range(len(list(sub_eval_write_list))):
             if sub_eval_user_all_list[i].subject_id == sub_eval_write_list[j].id:
@@ -210,13 +213,14 @@ def mytable(request, user_id):
     my_eval_list = []
     sum = 0
     for i in range(len(my_eval)):
-        try : my_eval_list.append(SubjectInfo.objects.get(id=my_eval[i].get('subject_id'), year = 2021, session= 'spring'))
+        try:
+            my_eval_list.append(SubjectInfo.objects.get(id=my_eval[i].get('subject_id'), year=2021, session='spring'))
         except SubjectInfo.DoesNotExist:
             continue
 
     context = {'subject_list': qs, 'subject_selected_list': subject_selected_list,
                'sum': sum, 'eval_list': eval_list, 'subject_eval_list': subject_eval_list,
-               'sub_eval_write': sub_eval_write_list, 'my_eval_list' : my_eval_list}
+               'sub_eval_write': sub_eval_write_list, 'my_eval_list': my_eval_list}
     return render(request, 'timetable/main.html', context)
 
 
@@ -226,12 +230,14 @@ def add(request, subject_id):
     """
     if request.method == 'GET':
         tmp_subject = SubjectInfo.objects.get(id=subject_id)
-        subject_add_list = Subject_add.objects.filter(user_id=request.user.id).values('subject_add_id').distinct().order_by(
-        '-id')
+        subject_add_list = Subject_add.objects.filter(user_id=request.user.id).values(
+            'subject_add_id').distinct().order_by(
+            '-id')
         subject_selected_list = []
         try:
             for i in range(len(subject_add_list)):
-                subject_selected_list.append(SubjectInfo.objects.get(id=subject_add_list[i].get('subject_add_id'), year = 2021, session= 'fall'))
+                subject_selected_list.append(
+                    SubjectInfo.objects.get(id=subject_add_list[i].get('subject_add_id'), year=2021, session='fall'))
         except SubjectInfo.DoesNotExist:
             pass
         overlap = False
@@ -911,19 +917,32 @@ def eval_add(request, subject_id):
     평가 등록
     """
     user = request.user
-    gr_ade = "grade-"+str(subject_id)
-    assign_ment = "homework-"+str(subject_id)
-    t_est = "exam-"+str(subject_id)
+    subeval = SubjectEval.objects.filter(user_id=user.id)
+    gr_ade = "grade-" + str(subject_id)
+    assign_ment = "homework-" + str(subject_id)
+    t_est = "exam-" + str(subject_id)
     sub_ject = SubjectInfo.objects.get(id=subject_id)
     evaluation = Evaluation(subject=sub_ject, comment=request.POST.get('content'),
                             grade=request.POST.get(gr_ade),
                             assignment=request.POST.get(assign_ment),
                             test=request.POST.get(t_est))
-    evaluation.save()
-    subject_eval = SubjectEval(evaluation=evaluation, subject=sub_ject, user=user)
-    subject_eval.save()
-    return redirect('timetable:mytable', user_id=request.user.id)
+    if len(subeval) != 0:
+        return redirect('timetable:mytable', user_id=request.user.id)
+    else:
+        evaluation.save()
+        subject_eval = SubjectEval(evaluation=evaluation, subject=sub_ject, user=user)
+        subject_eval.save()
+        return redirect('timetable:mytable', user_id=request.user.id)
 
+
+def eval_del(request, subject_id):
+    """
+    평가 삭제
+    """
+    subjecteval = SubjectEval.objects.get(subject_id=subject_id)
+    evaluation = Evaluation.objects.get(id=subjecteval.evaluation_id)
+    evaluation.delete()
+    return redirect('timetable:mytable', user_id=request.user.id)
 
 # def data_save(request):
 #     # 엑셀파일 받기
