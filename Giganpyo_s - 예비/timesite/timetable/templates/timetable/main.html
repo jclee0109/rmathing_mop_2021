@@ -13,17 +13,54 @@ src: url('/fonts/NanumBarunGothic.eot') format('embedded-opentype'),
 url('/fonts/NanumBarunGothic.woff') format('woff');}
 
     @media  only screen and (min-width:650px) and (max-width:1024px) {
+      #view_write_alarm{
+        border-radius: 5px;
+         border-top-left-radius: 0%;
+         border-bottom-left-radius: 0%;
+         padding: 20px;
+         padding: 3px;
+         color: white;
+         font-size:13px; 
+         font-weight: 100;
+         background-color: rgb(58, 184, 106);
+         border: none;
+         position: fixed;
+         z-index: 5;
+         width: 30px;
+        height: 160px;
+        }
+      #alarms{
+       background-color: rgb(218, 218, 218);
+        color:black;
+         font-size:12px; 
+         text-align:left;
+         margin-bottom:20px;
+         border-radius: 5px;
+         border-top-left-radius: 0%;
+         border-bottom-left-radius: 0%;
+         padding: 10px;
+         padding-top: 0;
+         padding-bottom: 0;
+         position: fixed;
+         margin-left: 28px;
+        z-index: 4;
+      height: 160px;
+      text-align: left;   
+      width: 270px;
+      }
     #table2 { position:relate!important;}
 #outer_btn_right { display: none; }
 #table2 { display: none; }
 #myCanvas1{
 position: absolute;
+z-index: 2;
 }
 #myCanvas2{
 display: none;
     }
 #myCanvas3{
 position: absolute;
+z-index: 3;
 }
 #view_write_review{
     padding:3px;
@@ -79,9 +116,9 @@ display: none;
 }
 
 label span {
-border: 0.5px solid #ccc;
-width: 15px;
-height: 15px;
+border: 1px solid #ccc;
+width: 12px;
+height: 12px;
 position: absolute;
 overflow: hidden;
 line-height: 1;
@@ -91,12 +128,12 @@ border-radius: 100%;
 font-size: 10pt;
 left: 0;
 top: 50%;
-margin-top: -7.5px;
+margin-top: -6px;
 }
 
 input:checked+span {
-background: #57af4c;
-border-color: #57af4c;
+background: #ccf;
+border-color: #ccf;
 }
 
 body{
@@ -125,6 +162,10 @@ padding: 20px;
 .subject_button2 {
   display: grid;
   grid-template-columns: 1fr 90px 60px;
+}
+.subject_button7 {
+  display: grid;
+  grid-template-columns: 1fr 60px;
 }
 .select_review_button{
         padding:1px 1px;
@@ -341,19 +382,19 @@ height: 350px;
   select:not(:-internal-list-box) {
 
 }
-  .review_table{
+  #review_bag{
     height: 400px;
       overflow: auto;
 }
 
-    .review_table::-webkit-scrollbar {
+    #review_bag::-webkit-scrollbar {
     width: 10px;
   }
-  .review_table::-webkit-scrollbar-thumb {
+  #review_bag::-webkit-scrollbar-thumb {
     background-color: #57af4c;
     border-radius: 10px;
   }
-  .review_table::-webkit-scrollbar-track {
+  #review_bag::-webkit-scrollbar-track {
     background-color: grey;
     border-radius: 10px;
     box-shadow: inset 0px 0px 5px white;
@@ -379,7 +420,7 @@ height: 350px;
  background-color: #a7a7a7;
 
     padding:70px;
-     padding-top:5px;
+     padding-top:50px;
     text-align: center;
     color:white;
     font-size:15px;
@@ -451,6 +492,12 @@ padding: 5px;
 background-color:rgb(240, 240, 240);
 width:196;
 }
+#so{
+    padding: 5px;
+    margin: 1px;
+background-color:rgb(240, 240, 240);
+width:600;
+}
 select:hover{
 padding: 5px;
 background-color:white;
@@ -467,13 +514,43 @@ width:297px!important;
 }
 </style>
     <style >
-    @media  only screen and  (min-width:1024px) {
-      #result_bag_0{
-border-radius:5px;
-width:400px;
-margin:0;
-height: 400px;
-}
+      @media  only screen and  (min-width:1024px) {
+      #view_write_alarm{
+        border-radius: 5px;
+         border-top-left-radius: 0%;
+         border-bottom-left-radius: 0%;
+         padding: 20px;
+         padding: 3px;
+         color: white;
+         font-size:13px; 
+         font-weight: 100;
+         background-color: rgb(58, 184, 106);
+         border: none;
+         position: fixed;
+         z-index: 5;
+         width: 30px;
+        height: 160px;
+        }
+        #alarms{
+       background-color: rgb(218, 218, 218);
+       color:black;
+         font-size:12px; 
+         text-align:left;
+         margin-bottom:20px;
+         border-radius: 5px;
+         border-top-left-radius: 0%;
+         border-bottom-left-radius: 0%;
+         padding: 10px;
+         padding-top: 0;
+         padding-bottom: 0;
+         position: fixed;
+         margin-left: 28px;
+        z-index: 4;
+      height: 160px;
+      text-align: left;   
+      width: 270px;
+      }
+
 #result_bag0{
 border-radius:5px;
 width:382px;
@@ -544,11 +621,11 @@ height: 70px;
     }
     #myCanvas1{
     position: absolute!important;
-    z-index :1;
+    z-index :2;
     }
     #myCanvas3{
     position: absolute!important;
-    z-index :2;
+    z-index :3;
     }
     #light_down{
     display:none;
@@ -612,7 +689,7 @@ display: none;
 }
 
 label span {
-border: 0.5px solid #ccc;
+border: 1px solid #ccc;
 width: 15px;
 height: 15px;
 position: absolute;
@@ -627,8 +704,8 @@ margin-top: -7.5px;
 }
 
 input:checked+span {
-background: #57af4c;
-border-color: #57af4c;
+  background: #ccf;
+border-color: #ccf;
 }
 #imgdown_button{
 
@@ -662,6 +739,10 @@ padding: 10px;
   display: grid;
   grid-template-columns: 1fr 90px 60px;
 }
+.subject_button7 {
+  display: grid;
+  grid-template-columns: 1fr 60px;
+}
 .subject_button6 {
   display: grid;
   grid-template-columns: 1fr 90px 90px;
@@ -671,9 +752,10 @@ padding: 10px;
   grid-template-columns: 220px 1fr;
 }
 table {
-   border: 0.1px solid #444444;
+  border: 0.1px solid #444444;
   border-collapse: collapse;
   font-size: 5px;
+  z-index: 1;
 }
 th,
 td {
@@ -699,6 +781,11 @@ border-bottom: 1px dotted rgb(200, 200, 200);
 }
 .table{
 width:600px;
+border: 0px;
+
+}
+.table4{
+width:380px;
 border: 0px;
 
 }
@@ -888,19 +975,19 @@ height: 500px;
 
 }
 
-  .review_table{
+  #review_bag{
     height: 400px;
       overflow: auto;
 }
 
-    .review_table::-webkit-scrollbar {
+    #review_bag::-webkit-scrollbar {
     width: 10px;
   }
-  .review_table::-webkit-scrollbar-thumb {
+  #review_bag::-webkit-scrollbar-thumb {
     background-color: #57af4c;
     border-radius: 10px;
   }
-  .review_table::-webkit-scrollbar-track {
+  #review_bag::-webkit-scrollbar-track {
     background-color: grey;
     border-radius: 10px;
     box-shadow: inset 0px 0px 5px white;
@@ -926,7 +1013,7 @@ height: 500px;
  background-color: #a7a7a7;
 
     padding:70px;
-     padding-top:5px;
+     padding-top:50px;
     text-align: center;
     color:white;
     font-size:15px;
@@ -1012,16 +1099,53 @@ i{display:none;}
     <style>
 
 @media  only screen and (max-width:650px) {
+  #view_write_alarm{
+        border-radius: 3px;
+        border-top-left-radius: 0%;
+        border-bottom-left-radius: 0%;
+        padding: 5px;
+        color: white;
+        font-size:6px; 
+        font-weight: 50;
+        background-color: rgb(58, 184, 106);
+        border: none;
+        position: fixed;
+        z-index: 5;
+        width: 20px;
+        height: 150px;
+        }
+      #alarms{
+       background-color: rgb(218, 218, 218);
+        color:black;
+        font-size:5px; 
+        text-align:left;
+        margin-bottom:20px;
+        border-radius: 5px;
+        border-top-left-radius: 0%;
+        border-bottom-left-radius: 0%;
+        padding: 5px;
+        padding-top: 0;
+        padding-bottom: 0;
+        position: fixed;
+        margin-left: 16px;
+        z-index: 4;
+        height: 150px;
+        text-align: left;   
+        width: 230px;
+      }
 #table1 { display: none; }
 #table2 { position:relate!important;}
 #myCanvas1{
 display: none;
+z-index: 2;
 }
 #myCanvas3{
 display: none;
+z-index: 3;
 }
 #myCanvas2{
 position: absolute;
+z-index: 2;
 }
 #outer_btn_right { display: none; }
 #view_write_review{
@@ -1095,7 +1219,7 @@ display: none;
 }
 
 label span {
-border: 0.5px solid #ccc;
+border: 1px solid #ccc;
 width: 15px;
 height: 15px;
 position: absolute;
@@ -1110,8 +1234,8 @@ margin-top: -7.5px;
 }
 
 input:checked+span {
-background: #57af4c;
-border-color: #57af4c;
+  background: #ccf;
+border-color: #ccf;
 }
 #imgdown_button{
 
@@ -1157,6 +1281,10 @@ padding: 10px;
 
   display: grid;
   grid-template-columns: 1fr 50px 38px;
+}
+.subject_button7 {
+  display: grid;
+  grid-template-columns: 1fr 38px;
 }
 .select_review_button{
         display: none;
@@ -1372,7 +1500,7 @@ font-size: 6px;
 #bottom_design{
  background-color: #a7a7a7;
     padding:35px;
-     padding-top:5px;
+     padding-top:20px;
     text-align: center;
     color:white;
     font-size:7px;
@@ -1444,7 +1572,12 @@ background-color:rgb(240, 240, 240);
 width:95px;
     font-size: 5px;
 }
-
+#so{
+    padding: 5px;
+    margin: 1px;
+background-color:rgb(240, 240, 240);
+width:296;
+}
 select:hover{
 padding: 3px;
 background-color:white;
@@ -1469,29 +1602,29 @@ margin-right: 4px;
     <script>
       var bag_counts = 0;
       var i= 1 ;
-      var day1_g = [800];
-      var start_timeh1_g = [800];
-      var start_timem1_g =[800];
-      var finish_timeh1_g =[800];
-      var finish_timem1_g = [800];
-      var day2_g = [800];
-      var start_timeh2_g = [800];
-      var start_timem2_g = [800];
-      var finish_timeh2_g =[800];
-      var finish_timem2_g = [800];
-      var day3_g = [800];
-      var start_timeh3_g = [800];
-      var start_timem3_g = [800];
-      var finish_timeh3_g =[800];
-      var finish_timem3_g = [800];
-      var day4_g = [800];
-      var start_timeh4_g = [800];
-      var start_timem4_g = [800];
-      var finish_timeh4_g =[800];
-      var finish_timem4_g = [800];
+      var day1_g = [400];
+      var start_timeh1_g = [400];
+      var start_timem1_g =[400];
+      var finish_timeh1_g =[400];
+      var finish_timem1_g = [400];
+      var day2_g = [400];
+      var start_timeh2_g = [400];
+      var start_timem2_g = [400];
+      var finish_timeh2_g =[400];
+      var finish_timem2_g = [400];
+      var day3_g = [400];
+      var start_timeh3_g = [400];
+      var start_timem3_g = [400];
+      var finish_timeh3_g =[400];
+      var finish_timem3_g = [400];
+      var day4_g = [400];
+      var start_timeh4_g = [400];
+      var start_timem4_g = [400];
+      var finish_timeh4_g =[400];
+      var finish_timem4_g = [400];
                               
-      var s_time = [800];
-      var f_time = [800];
+      var s_time = [400];
+      var f_time = [400];
       window.onload = function determines(i) {
         var j;
 
@@ -1788,6 +1921,16 @@ ctx.font = '12px Arial';
     <!--테이블 생성-->
     <div class="line">
       <div>
+        <button id="view_write_alarm" onclick=location.href="javascript:viewDisplay();">주의사항</button>
+        <div id="clickToView" style="display:none; position: absolute;">
+          <div id= "alarms" ><br>
+            1. pc에서 사용하는것을 권장합니다!<br><br>
+            2. 아이폰,아이패드에서는 오류가 날 수 있어요 ㅜ<br><br>
+            3. 크롬에서 사용하기를 권장합니다!<br><br>
+            4. [시간 변경] 전략경영 / 기술벤처창업론 / 일반생물학 실험 / 컴퓨터프로그래밍 2분반 / <br>
+          </div>
+        </div>
+
         <button id="view_write_review" onclick=location.href="javascript:viewDisplay2();">수강평 작성</button>
         <div id="clickToView" style="display:none; position: absolute;">
             <div id="write_review">
@@ -1821,7 +1964,7 @@ ctx.font = '12px Arial';
 
                             <form action="{% url 'timetable:eval_add' subject.id %}" method="post">
                                 {% csrf_token %} 
-                                <textarea placeholder="한줄평을 남겨주세요." name="content" id="content" rows="5"></textarea>
+                                <textarea placeholder="한줄평을 남겨주세요.(교수님이 성적을 잘 주시는 편인가요? 과제와 시험의 난이도와 양은 어떤가요?)." name="content" id="content" rows="5"></textarea>
                                 <div>
                                     <div style="margin: 3px;">
                                         <span style="font-size: 12px;">성적</span>
@@ -2181,7 +2324,7 @@ ctx.font = '12px Arial';
                     {% for subject in subject_selected_list %}
                     <tr id="tr_noline" class="text-center">
                         <td class = "text-left">
-                            <div  class="subject_button2">
+                            <div  class="subject_button7">
                               <div id="result_bag1">
                                 <strong>{{subject.code}}</strong>  
                                 {{ subject.name }} - {{ subject.professor1 }}<br>
@@ -2214,10 +2357,11 @@ ctx.font = '12px Arial';
                 </table>
             </div>
             <br>
+            <div id="no_show">
             <div id="result_bag">
               <div id="result_back">
 
-                  <div id="result">저번 수강과목</div></div>
+                  <div id="result">내가 쓴 강의평목록</div></div>
               <table class = "table">
                   <tbody>
                     
@@ -2244,54 +2388,61 @@ ctx.font = '12px Arial';
                   </tbody>
               </table>
           </div>
-
+          </div>
             <div id="light_down">
-                <div id="result">검색창</div>
-                <form method="get" action="{% url 'timetable:mytable' request.user.id %}">
-                <select id= "department" name = "department" >
-                    <option disabled selected value>---select department----</option>
-                    <option value="생명과학전공">생명과학전공</option>
-                    <option value="화학전공">화학전공</option>
-                    <option value="전기전자컴퓨터전공">전기전자컴퓨터전공</option>
-                    <option value="문화기술 부전공">문화기술 부전공</option>
-                    <option value="지구환경공학전공">지구환경공학전공</option>
-                    <option value="에너지부전공">에너지부전공</option>
-                    <option value="기초교육학부">기초교육학부</option>
-                    <option value="지능로봇 부전공">지능로봇 부전공</option>
-                    <option value="신소재공학전공">신소재공학전공</option>
-                    <option value="기계공학전공">기계공학전공</option>
-                    <option value="의생명공학 부전공">의생명공학 부전공</option>
-                    <option value="수학부전공">수학부전공</option>
-                    <option value="물리전공">물리전공</option>
-                    <option value="대학공통">대학공통</option>
-                </select>
-                <select id= "day" name = "day" >
-                    <option disabled selected value>---select day----</option>
-                    <option value="월">월</option>
-                    <option value="화">화</option>
-                    <option value="수">수</option>
-                    <option value="목">목</option>
-                    <option value="금">금</option>
-                </select>
-                <select id= "time" name = "time" >
-                    <option disabled selected value>---select time----</option>
-                    <option value="09:00">09:00~10:30</option>
-                    <option value="10:30">10:30~12:00</option>
-                    <option value="13:00">13:00~14:30</option>
-                    <option value="14:30">14:30~16:00</option>
-                    <option value="16:00">16:00~17:30</option>
-                </select>
+              <div id="result">검색창</div>
+              <form method="get" action="{% url 'timetable:mytable' request.user.id %}">
+              <select id= "department" name = "department" >
+                  <option disabled selected value>---select department----</option>
+                  <option value="생명과학부">생명과학부</option>
+                  <option value="화학과">화학과</option>
+                  <option value="전기전자컴퓨터공학부">전기전자컴퓨터공학부</option>
+                  <option value="문화기술 부전공">문화기술 부전공</option>
+                  <option value="지구환경공학부">지구환경공학부</option>
+                  <option value="에너지부전공">에너지부전공</option>
+                  <option value="기초교육학부">기초교육학부</option>
+                  <option value="지능로봇 부전공">지능로봇 부전공</option>
+                  <option value="신소재공학부">신소재공학부</option>
+                  <option value="기계공학부">기계공학부</option>
+                  <option value="의생명공학 부전공">의생명공학 부전공</option>
+                  <option value="수학부전공">수학부전공</option>
+                  <option value="물리광과학과">물리광과학과</option>
+                  <option value="인문학·사회과학 부전공">인문학·사회과학 부전공</option>
+                  <option value="대학공통">대학공통</option>
+              </select>
+              <select id= "day" name = "day" >
+                  <option disabled selected value>---select day----</option>
+                  <option value="월">월</option>
+                  <option value="화">화</option>
+                  <option value="수">수</option>
+                  <option value="목">목</option>
+                  <option value="금">금</option>
+              </select>
+              <select id= "time" name = "time" >
+                  <option disabled selected value>---select time----</option>
+                  <option value="09:00">09:00~10:30</option>
+                  <option value="10:30">10:30~12:00</option>
+                  <option value="13:00">13:00~14:30</option>
+                  <option value="14:30">14:30~16:00</option>
+                  <option value="16:00">16:00~17:30</option>
+              </select>
 
-                    <input class="form-control py-2 border-right-0 border" type="search" name="name" placeholder="Subject name contains..." />
+              <select id="so" name="so">
+                <option value="">정렬 옵션</option>
+                <option value="default">기본 정렬</option>
+                <option value="name">이름순 정렬</option>
+                <option value="select">담은 사람 순 정렬</option>
+              </select>
 
-                    <input class="search2_1" type="search" name="professor" placeholder="Professor name..." />
+                  <input class="form-control py-2 border-right-0 border" type="search" name="name" placeholder="Subject name contains..." />
 
-                    <input class="search2_1" type="search" name="code" placeholder="Subject code(ex : GS1001, GS1002 ...)" />
+                  <input class="search2_1" type="search" name="professor" placeholder="Professor name..." />
 
-                    <button class="btn btn-outline-secondary" id="btn_search" type="submit">찾기</button>
+                  <input class="search2_1" type="search" name="code" placeholder="Subject code(ex : GS1001, GS1002 ...)" />
 
-                </form>
+                  <button class="btn btn-outline-secondary" id="btn_search" type="submit">찾기</button>
 
+              </form>
 
                 <!-- checkbox -->
                 <div class="container my-3">
@@ -2369,42 +2520,49 @@ ctx.font = '12px Arial';
         <div id="outer_btn_right">
             <div class="form-group">
                 <form method="get" action="{% url 'timetable:mytable' request.user.id %}">
-                    <div id="result1">검색창 </div>
-                    <div id="select_box">
-                        <select name = "department" >
-                            <option disabled selected value>---select department----</option>
-                            <option value="생명과학전공">생명과학전공</option>
-                            <option value="화학전공">화학전공</option>
-                            <option value="전기전자컴퓨터전공">전기전자컴퓨터전공</option>
-                            <option value="문화기술 부전공">문화기술 부전공</option>
-                            <option value="지구환경공학전공">지구환경공학전공</option>
-                            <option value="에너지부전공">에너지부전공</option>
-                            <option value="기초교육학부">기초교육학부</option>
-                            <option value="지능로봇 부전공">지능로봇 부전공</option>
-                            <option value="신소재공학전공">신소재공학전공</option>
-                            <option value="기계공학전공">기계공학전공</option>
-                            <option value="의생명공학 부전공">의생명공학 부전공</option>
-                            <option value="수학부전공">수학부전공</option>
-                            <option value="물리전공">물리전공</option>
-                            <option value="대학공통">대학공통</option>
-                        </select>
-                        <select name = "day" >
-                            <option disabled selected value>---select day----</option>
-                            <option value="월">월</option>
-                            <option value="화">화</option>
-                            <option value="수">수</option>
-                            <option value="목">목</option>
-                            <option value="금">금</option>
-                        </select>
-                        <select name = "time" >
-                            <option disabled selected value>---select time----</option>
-                            <option value="09:00">09:00~10:30</option>
-                            <option value="10:30">10:30~12:00</option>
-                            <option value="13:00">13:00~14:30</option>
-                            <option value="14:30">14:30~16:00</option>
-                            <option value="16:00">16:00~17:30</option>
-                        </select>
-                    </div>
+                  <div id="result1">검색창 </div>
+                  <div id="select_box">
+                      <select name = "department" >
+                        <option disabled selected value>---select department----</option>
+                        <option value="생명과학부">생명과학부</option>
+                        <option value="화학과">화학과</option>
+                        <option value="전기전자컴퓨터공학부">전기전자컴퓨터공학부</option>
+                        <option value="문화기술 부전공">문화기술 부전공</option>
+                        <option value="지구환경공학부">지구환경공학부</option>
+                        <option value="에너지부전공">에너지부전공</option>
+                        <option value="기초교육학부">기초교육학부</option>
+                        <option value="지능로봇 부전공">지능로봇 부전공</option>
+                        <option value="신소재공학부">신소재공학부</option>
+                        <option value="기계공학부">기계공학부</option>
+                        <option value="의생명공학 부전공">의생명공학 부전공</option>
+                        <option value="수학부전공">수학부전공</option>
+                        <option value="물리광과학과">물리광과학과</option>
+                        <option value="인문학·사회과학 부전공">인문학·사회과학 부전공</option>
+                        <option value="대학공통">대학공통</option>
+                      </select>
+                      <select name = "day" >
+                          <option disabled selected value>---select day----</option>
+                          <option value="월">월</option>
+                          <option value="화">화</option>
+                          <option value="수">수</option>
+                          <option value="목">목</option>
+                          <option value="금">금</option>
+                      </select>
+                      <select name = "time" >
+                          <option disabled selected value>---select time----</option>
+                          <option value="09:00">09:00~10:30</option>
+                          <option value="10:30">10:30~12:00</option>
+                          <option value="13:00">13:00~14:30</option>
+                          <option value="14:30">14:30~16:00</option>
+                          <option value="16:00">16:00~17:30</option>
+                      </select>
+                      <select name="so">
+                        <option value="">정렬 옵션</option>
+                        <option value="default">기본 정렬</option>
+                        <option value="name">이름순 정렬</option>
+                        <option value="select">담은 사람 순 정렬</option>
+                      </select>
+                  </div>
 
                     <input class="form-control py-2 border-right-0 border" type="search" name="name" placeholder="Subject name contains..." />
 
@@ -2633,10 +2791,10 @@ ctx.font = '12px Arial';
             <div id="result_bag_0">
                 <div id="result_back_0">
 
-                  <div id="result">내 강의평 보기 </div></div>
+                  <div id="result">전체 강의평 보기 </div></div>
                 <div id="review_bag">
 
-                <table class = "table">
+                <table class = "table4">
                   <tbody>
                     {% if my_eval_list %}
                     {% for subject in my_eval_list %}

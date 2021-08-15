@@ -112,13 +112,14 @@ def mytable(request, user_id):
         '-id')
     subject_selected_list = []
     sum = 0
-    try:
-        for i in range(len(subject_add_list)):
+    
+    for i in range(len(subject_add_list)):
+        try:
             subject_selected_list.append(
-                SubjectInfo.objects.get(id=subject_add_list[i].get('subject_add_id'), year=2021, session='fall'))
-    except SubjectInfo.DoesNotExist:
-        pass
-
+            SubjectInfo.objects.get(id=subject_add_list[i].get('subject_add_id'), year=2021, session='fall'))
+        except SubjectInfo.DoesNotExist:
+            continue
+   
     for i in range(len(subject_selected_list)):
         sum += subject_selected_list[i].credit
 
@@ -211,7 +212,7 @@ def mytable(request, user_id):
     """
     my_eval = SubjectEval.objects.filter(user_id=request.user.id).values('subject_id').distinct()
     my_eval_list = []
-    sum = 0
+
     for i in range(len(my_eval)):
         try:
             my_eval_list.append(SubjectInfo.objects.get(id=my_eval[i].get('subject_id'), year=2021, session='spring'))
@@ -917,7 +918,7 @@ def eval_add(request, subject_id):
     평가 등록
     """
     user = request.user
-    subeval = SubjectEval.objects.filter(user_id=user.id)
+    subeval = SubjectEval.objects.filter(user_id=user.id, subject_id=subject_id)
     gr_ade = "grade-" + str(subject_id)
     assign_ment = "homework-" + str(subject_id)
     t_est = "exam-" + str(subject_id)
